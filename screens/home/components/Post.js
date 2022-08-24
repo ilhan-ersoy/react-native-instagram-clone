@@ -1,27 +1,45 @@
-import { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
-import { TextInput, Image, Button } from "react-native";
+import { useState, useRef } from "react";
+import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { TextInput, Image} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
-import { setShow, show } from "../../../redux/appSlice";
 import BottomSheet from "react-native-gesture-bottom-sheet";
 
-import { Hearth, More, Comment, Message, BookMark } from "../../../Icons";
+import { Hearth, More, Comment, Message, BookMark, Verified, HearthLike } from "../../../Icons";
 import Swiper, {scrollTo} from 'react-native-swiper';
+import SendStory from "./InstaStory/SendStory";
+import DoubleClick from "react-native-double-tap";
+import ReelsVideo from "../../reels/ReelsVideo";
+import { setHomeOpacity } from "../../../redux/appSlice";
 
 
-const Post = ({post,setShowComments,navigation, bottomSheet}) => {
+const Post = ({post,setShowComments,navigation,bottomSheet}) => {
 
     const [currentIndex, setCurrentIndex] = useState(0); 
 
-    //console.log(currentIndex);
-
     const dispatch = useDispatch();
+
+    const postBottomSheet = useRef();
+
+    const homeOpacity = useSelector(state => state.app.homeOpacity);
+
+
+    const [showHeart, setShowHeart] = useState(false);
+
+    const handleLike = () => {
+        setShowHeart(true);
+        setTimeout(() => {
+            setShowHeart(false);
+        },1000);
+
+    }
+
+    const [sendShort,setSendShort] = useState(true);
     
 
     return (
      
         <View key={post.id}>
-            <View style={styles.header}>
+            <View style={[styles.header]}>
                 <View style={styles.user}>
                     <Image
                         style={styles.avatar}
@@ -29,41 +47,74 @@ const Post = ({post,setShowComments,navigation, bottomSheet}) => {
                             uri:post.user.avatarImg
                         }}
                     />  
-                    <TouchableOpacity onPress={() => navigation.navigate('Details')} opacity={0.8}>
+                    <TouchableOpacity onPress={() => navigation.navigate('OtherProfile')} opacity={0.8}>
                         <Text style={{fontSize:12,fontWeight:'bold',marginLeft:5}}>{post.user.name}</Text>
                     </TouchableOpacity>
+                    {post.user.isVerified && <View style={{marginLeft:2}}>
+                        <Verified size={15} />
+                    </View>}
                 </View>
                 <TouchableOpacity style={{height:40,width:40,alignItems:'center', justifyContent:'center'}} onPress={()=>bottomSheet.current.show()}>
                     <More width={22}/>
                 </TouchableOpacity>
             </View>
         
+            <View style={{position:'absolute',top:'30%',right:'40%',zIndex:999,opacity:`${showHeart ? 1 : 0}`}}>
+                <HearthLike size={64} />
+            </View>
+            
             <Swiper onIndexChanged={(e) => setCurrentIndex(e)} loop={false} showsPagination={false} style={{height:350}}>
                     <View>
-                        <Image
-                            style={styles.postImage}
-                            source={{
-                                uri:post.postImg
+                        <DoubleClick
+                            singleTap={() => {
+                                console.log("single tap");
                             }}
-                        />
+                            doubleTap={() => handleLike()}
+
+                            delay={200}
+                            >
+                            <Image
+                                style={styles.postImage}
+                                source={{
+                                    uri:post.postImg
+                                }}
+                            />
+                        </DoubleClick>
                     </View>
+
                     <View>
-                        <Image
-                            style={styles.postImage}
-                            source={{
-                                uri:post.postImg
+                        <DoubleClick
+                            singleTap={() => {
+                                console.log("single tap");
                             }}
-                        />
+                            doubleTap={() => handleLike()}
+                            delay={200}
+                            >
+                            <Image
+                                style={styles.postImage}
+                                source={{
+                                    uri:post.postImg
+                                }}
+                            />
+                        </DoubleClick>
                     </View>
+
                     <View>
-                        <Image
-                            style={styles.postImage}
-                            source={{
-                                uri:post.postImg
+                        <DoubleClick
+                            singleTap={() => {
+                                console.log("single tap");
                             }}
-                        />
+                            doubleTap={() => handleLike()}
+                            delay={200}
+                            >
+                                <ReelsVideo postView={true} />
+                        </DoubleClick>
                     </View>
+
             </Swiper>
+            <View>
+ 
+      </View>
             <View style={styles.postInfo}>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                     <View>
@@ -73,10 +124,32 @@ const Post = ({post,setShowComments,navigation, bottomSheet}) => {
                     <View style={{marginLeft:12}}>
                         <Comment size={24}/>
                     </View>
+                    
+                    {homeOpacity && 
+                        <View style={{width:234,height:60,backgroundColor:'#fff',zIndex:999,position:'absolute',bottom:35,left:50,borderRadius:100,flexDirection:'row',justifyContent:'center',borderWidth:2,borderColor:'#efefef'}}>
+                            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',justifyContent:'center'}}>
+                                <Image 
+                                    style={{width:44,height:44,borderRadius:100,borderWidth:1,borderColor:'#CACACA'}}
+                                    source={{
+                                        uri:post.user.avatarImg,
+                                }}
+                                />
 
-                    <View style={{marginLeft:12}}>
+                                {new Array(3).fill(
+                                    <Image 
+                                        style={{width:44,height:44,borderRadius:100,marginLeft:13,borderWidth:1,borderColor:'#CACACA'}}
+                                        source={{
+                                            uri:post.user.avatarImg,
+                                        }} />
+                                )}
+                                
+                            </View>
+                        </View>
+                    }
+
+                    <TouchableOpacity onLongPress={()=>dispatch(setHomeOpacity(true))} onPressOut={()=>dispatch(setHomeOpacity(false))} onPress={() => postBottomSheet.current.show()} style={{marginLeft:12}}>
                         <Message size={24}/>
-                    </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={{flexDirection:'row',marginRight:50}}>
                     <TouchableOpacity opacity={1} style={{width:8,height:8,backgroundColor:`${currentIndex == 0 ? '#32B5FF' : '#C4C4C4'}`,borderRadius:21}}></TouchableOpacity>
@@ -113,7 +186,6 @@ const Post = ({post,setShowComments,navigation, bottomSheet}) => {
                         </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.comments} onPress={()=>navigation.navigate('Comments')}>
-                    <Text style={{fontSize:13,opacity:0.5}}>View all 10 comments</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.addComment}>
@@ -135,7 +207,12 @@ const Post = ({post,setShowComments,navigation, bottomSheet}) => {
                     </View>
                 </View>
             </View>
-            
+
+
+            <BottomSheet hasDraggableIcon ref={postBottomSheet} height={'400'}>
+                <SendStory img={post.postImg} />
+            </BottomSheet>
+
         </View>
         //</ScrollView>
     )

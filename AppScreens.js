@@ -1,12 +1,15 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from "./screens/home";
 import ProfileScreen from "./screens/profile/Profile";
-import ShopScreen from "./screens/Shop";
+import ShopScreen from "./screens/shop/Shop";
 import ReelsScreen from "./screens/Reels";
 import { Home, HomeFilled, Reels, ReelsFilled, Search, SearchFilled, Shop, ShopFilled } from './Icons';
 import { StyleSheet, Image } from 'react-native';
 import SearchScreen from './screens/search/SearchScreen';
 import { useDispatch, useSelector } from 'react-redux';
+import ExploreScreen from './screens/explore/explore';
+
+
 
 const Tab = createBottomTabNavigator();
 
@@ -43,7 +46,7 @@ function AppScreens() {
                 name="Profile" 
                 component={SearchScreen}
                 options={{
-                    headerTitle:'Araştır',
+                    headerTitle:'Search',
                     tabBarIcon: ({focused, size, color}) => {
                         if (focused) {
                             return <SearchFilled size={26} color={color} />
@@ -86,14 +89,13 @@ function AppScreens() {
                         return (
                             <Image
                                 style={[styles.profileAvatar, {borderColor: focused ? 'black': 'transparent'}]}
-                                source={{
-                                    uri:'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/240936026_508945976807276_3878467107109739721_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=tviEQGwQpCIAX-YR6pg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT9Ea9hI2ve_bZEoXmcwlla819vuOHsO-ywfSw1yM7z1ag&oe=62E9BFE7&_nc_sid=8fd12b',
-                                }}
+                                source={require('./assets/img/ilhan_ers.jpg')}
                             />
                         )
                     }
                 }}
             />
+
         </Tab.Navigator>
     )
 }

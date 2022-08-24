@@ -3,9 +3,15 @@ import { TextInput, Image } from "react-native";
 import { Burger, DropDown, Plus, Security, SinglePlus } from "../../Icons";
 import Content from "./Content";
 import { ScrollView } from "react-native";
+import { useRef } from 'react';
+import BottomSheet from "react-native-gesture-bottom-sheet";
+import ProfileSettings from '../home/components/BottomSheets/ProfileSettings';
+
 
 
 function ProfileScreen({navigation}) {
+    
+    const bottomSheet = useRef();
     
     return (
         <ScrollView style={{height:'100%'}}>
@@ -26,7 +32,7 @@ function ProfileScreen({navigation}) {
                                 <Plus size={30} />
                             </TouchableOpacity>
                             
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => bottomSheet.current.show()}>
                                 <Burger size={30} />
                             </TouchableOpacity>
                         </View>         
@@ -35,7 +41,7 @@ function ProfileScreen({navigation}) {
 
                     <View style={styles.user}>
                         <View>
-                            <Image style={{width:80,height:80,borderWidth:1,borderColor:'#BABABA',borderRadius:100}} source={{uri:'https://scontent.cdninstagram.com/v/t51.2885-19/240936026_508945976807276_3878467107109739721_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=108&_nc_ohc=FBZOZ3tRBe8AX8hzgaw&edm=APs17CUBAAAA&ccb=7-5&oh=00_AT_8lh3b7dbNeLBye0K-CI_KH2ed46hP0mv-m_XFrr40eg&oe=62DDE267&_nc_sid=978cb9'}} />
+                            <Image style={{width:80,height:80,borderWidth:1,borderColor:'#BABABA',borderRadius:100}} source={require('../../assets/img/ilhan_ers.jpg')} />
                         </View>
                         <View style={{flexDirection:'row',marginLeft:40, alignItems:'center'}}>
                             <View style={{alignItems:'center'}}>
@@ -72,17 +78,12 @@ function ProfileScreen({navigation}) {
                                 Edit Profile
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>navigation.navigate('Login')} style={styles.edit}>
-                            <Text style={{fontWeight:'450'}}>
-                                Quit
-                            </Text>
-                        </TouchableOpacity>
                     </View>
 
                     <View style={{alignSelf:'flex-start',flexDirection:'row',alignItems:'center'}}>
                         <View style={{marginTop:10,flexDirection:'column',alignItems:'center'}}>
                             <View style={styles.story}>
-                                <Image style={{width:68,height:68,borderWidth:1,borderColor:'#BABABA',borderRadius:100}} source={{uri:'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/203295320_190465583083074_1569209092314993715_n.jpg?stp=c0.247.640.640a_dst-jpg_e15_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=ASqTsY6q67kAX9lSnQ2&edm=AGW0Xe4BAAAA&ccb=7-5&oh=00_AT-1foBQrmzG86nawosX6Pi7iXEqxTm1TIBKGG3HfLZwaw&oe=62DF0F77&_nc_sid=acd11b'}} />
+                                <Image style={{width:68,height:68,borderWidth:1,borderColor:'#BABABA',borderRadius:100}} source={{uri:'https://scontent.cdninstagram.com/v/t51.2885-19/240936026_508945976807276_3878467107109739721_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=108&_nc_ohc=kN7LTZT3V6IAX81olyX&edm=APs17CUBAAAA&ccb=7-5&oh=00_AT_EBNaptFaroaqOkhC3aaBs-wMb2Z-h-doO8eFs9y1-_Q&oe=62F3A327&_nc_sid=978cb9'}} />
                             </View>
                             <Text style={{fontSize:13}}>
                                 Software
@@ -90,10 +91,10 @@ function ProfileScreen({navigation}) {
                         </View>
                         <View style={{marginTop:10,flexDirection:'column',alignItems:'center',marginLeft:10}}>
                             <View style={styles.story}>
-                                <Image style={{width:68,height:68,borderWidth:1,borderColor:'#BABABA',borderRadius:100}} source={{uri:'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/203295320_190465583083074_1569209092314993715_n.jpg?stp=c0.247.640.640a_dst-jpg_e15_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=ASqTsY6q67kAX9lSnQ2&edm=AGW0Xe4BAAAA&ccb=7-5&oh=00_AT-1foBQrmzG86nawosX6Pi7iXEqxTm1TIBKGG3HfLZwaw&oe=62DF0F77&_nc_sid=acd11b'}} />
+                                <Image style={{width:68,height:68,borderWidth:1,borderColor:'#BABABA',borderRadius:100}} source={{uri:'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/241885286_702809404446745_2398055998208104448_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=1&_nc_ohc=PIz9rpDzr1kAX_igiNW&edm=AHG7ALcBAAAA&ccb=7-5&oh=00_AT9gFjqYg9XfMzs9xBgTegTyDWGcwjGTQP5rqB23OYsa5A&oe=62EA6191&_nc_sid=5cbaad'}} />
                             </View>
                             <Text style={{fontSize:13}}>
-                                Software
+                                Movie
                             </Text>
                         </View>
                         <View style={{marginTop:10,flexDirection:'column',alignItems:'center',marginLeft:10}}>
@@ -110,8 +111,10 @@ function ProfileScreen({navigation}) {
                 <View style={{height:2000}}>
                     <Content />
                 </View>
-           
             </View>
+            <BottomSheet hasDraggableIcon ref={bottomSheet} height={'400'}>
+                <ProfileSettings />
+            </BottomSheet>
         </ScrollView>
     )
 }

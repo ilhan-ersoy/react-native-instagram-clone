@@ -5,10 +5,13 @@ import LoginScreen from './screens/Login/LoginScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState } from "react";
 import CommentsScreen from './screens/comments/Comments';
+import OtherProfileScreen from './screens/profile/Other/Other';
 import store from "./redux/store"
 import {Provider} from "react-redux";
 import {useDispatch, useSelector} from "react-redux";
 import { setShow, show } from "./redux/appSlice";
+import ExploreScreen from './screens/explore/explore';
+import MessageScreen from './screens/message/message';
 
 export default function App() {
 
@@ -37,6 +40,20 @@ export default function App() {
                 <Stack.Screen 
                   name="Comments" 
                   component={CommentsScreen} />
+
+                <Stack.Screen 
+                  name="OtherProfile" 
+                  component={OtherProfileScreen} />
+
+
+                <Stack.Screen 
+                  name="Explore" 
+                  component={ExploreScreen} />
+
+
+                <Stack.Screen 
+                  name="Message" 
+                  component={MessageScreen} />            
                   
             </Stack.Navigator>
           </NavigationContainer>

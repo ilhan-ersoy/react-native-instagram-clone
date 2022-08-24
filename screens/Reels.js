@@ -3,7 +3,7 @@ import { View, StyleSheet, Button } from 'react-native';
 import { Video, AVPlaybackStatus } from 'expo-av';
 import Swiper from 'react-native-swiper';
 import ReelsVideo from './reels/ReelsVideo';
-import ReelsVideoT from './reels/ReelsVideoT';
+import ReelsVideoI from './reels/ReelsVideoI';
 
 export default function ReelScreen() {
   const video = React.useRef(null);
@@ -12,11 +12,11 @@ export default function ReelScreen() {
   return (
     <Swiper loop={false} horizontal={false} showsPagination={false}>
       <View>
-        <ReelsVideo />
+        <ReelsVideo postView={false}/>
       </View>
-      <View>
-        <ReelsVideo />
-      </View>
+      {/*<View>
+        <ReelsVideoI postView={false}/>
+      </View>*/}
     </Swiper>
   );
 }

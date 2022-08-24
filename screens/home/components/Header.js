@@ -7,7 +7,7 @@ const Header = () => {
     const [show, setShow] = useState(false);
 
     return (
-        <View style={styles.HeaderContainer}>
+        <View style={[styles.HeaderContainer]}>
             <View style={{flexDirection:'row', alignItems:'center'}}>
                 <Logo />
                 <TouchableOpacity activeOpacity={0.6} onPress={() => setShow(!show)}>

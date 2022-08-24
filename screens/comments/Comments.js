@@ -63,9 +63,7 @@ const CommentsScreen = ({setShowComments,navigation}) => {
             <ScrollView style={{height:'100%'}}>
                 <View style={styles.body}>
                     <View>
-                        {new Array(30).fill(
-                            <SingleComment likesCount={12} timestamp={1} />
-                        )}
+                        {Array.from(Array(10), (_, i) => <SingleComment key={i} likesCount={12} timestamp={1} />)}
                     </View>
                 </View>
             </ScrollView>

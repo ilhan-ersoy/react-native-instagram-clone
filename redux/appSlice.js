@@ -5,7 +5,9 @@ export const appSlice = createSlice({
     initialState: {
         show:false,
 
-        reelsOpacity:false
+        reelsOpacity:false,
+
+        homeOpacity:false
     },
     reducers: {
         setShow: (state, action) => {
@@ -13,10 +15,13 @@ export const appSlice = createSlice({
         },
         setReelsOpacity: (state, action) => {
             state.reelsOpacity = action.payload
+        },
+        setHomeOpacity: (state, action) => {
+            state.homeOpacity = action.payload
         }
     }
 })
 
-export const { show, setShow, reelsOpacity, setReelsOpacity } = appSlice.actions
+export const { show, setShow, reelsOpacity, setReelsOpacity,setHomeOpacity,homeOpacity } = appSlice.actions
 
 export default appSlice.reducer

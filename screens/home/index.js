@@ -1,6 +1,6 @@
 import {View} from "react-native"
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { StyleSheet, ScrollView, TextInput, Text } from 'react-native';
+import { StyleSheet, ScrollView, TextInput, Text, RefreshControl } from 'react-native';
 
 import Header from "./components/Header";
 import Post from "./components/Post";
@@ -13,223 +13,97 @@ import { HearthReels, MessageReels } from "../../Icons";
 import { TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import BottomSheet from "react-native-gesture-bottom-sheet";
+import PostMore from "./components/BottomSheets/PostMore";
+import SendStory from "./components/InstaStory/SendStory";
+import { faker } from "@faker-js/faker";
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));  
+}
 
 const HomeScreen = ({navigation}) => {
   
     const [index, setIndex] = useState(0);
     const [showComments, setShowComments] = useState(false);
-    const show = useSelector(state => state.app.show);
+    const homeOpacity = useSelector(state => state.app.homeOpacity);
     const bottomSheet = useRef();
     
     const data = [
         {
-            user_id: 1,
-            user_image: 'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/240936026_508945976807276_3878467107109739721_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=tviEQGwQpCIAX-YR6pg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT9Ea9hI2ve_bZEoXmcwlla819vuOHsO-ywfSw1yM7z1ag&oe=62E9BFE7&_nc_sid=8fd12b',
+            user_image: 'https://pps.whatsapp.net/v/t61.24694-24/160010280_136974141658152_1790592786303292064_n.jpg?stp=dst-jpg_s96x96&ccb=11-4&oh=01_AVxPD6SPv7F5Gxun4Nk-3mwvYJzp3F0kPr538J3rY9ra2Q&oe=62F8A793',
             user_name: "ilhan.ers",
             stories: [
                 {
-                    story_id: 1,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
+                    story_image: "https://pps.whatsapp.net/v/t61.24694-24/160010280_136974141658152_1790592786303292064_n.jpg?stp=dst-jpg_s96x96&ccb=11-4&oh=01_AVxPD6SPv7F5Gxun4Nk-3mwvYJzp3F0kPr538J3rY9ra2Q&oe=62F8A793",
                     swipeText:'Custom swipe text for this story',
                     onPress: () => console.log('story 1 swiped'),
                 },
                 {
-                    story_id: 2,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/279077000_165685705821499_5895923453112369210_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=BtEiHxT8K4wAX9Cy9zF&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MjgyNDI5NzAxOTg3MzEwNzgzNw%3D%3D.2-ccb7-5&oh=00_AT9lNj4uAbiR08zxCV655qEHSsOkJIJwJhhNBdu8VBtbqw&oe=62E9EDB7&_nc_sid=30a2ef",
+                    story_image: "https://pps.whatsapp.net/v/t61.24694-24/160010280_136974141658152_1790592786303292064_n.jpg?stp=dst-jpg_s96x96&ccb=11-4&oh=01_AVxPD6SPv7F5Gxun4Nk-3mwvYJzp3F0kPr538J3rY9ra2Q&oe=62F8A793",
                     wipeText:'Custom swipe text for this story',
                     onPress: () => console.log('story 1 swiped'),
                 }]
-        },
-        {
-            user_id: 2,
-            user_image: 'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/244692226_282680550394602_6025779403371137870_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=44-FvdYjgbEAX-_Szb0&tn=KRN-Xfh86jfLlR-R&edm=AHG7ALcBAAAA&ccb=7-5&oh=00_AT-KQ6eve8XlDWxugKoKkKeNXpL0MQA8otStTuK7-jQySQ&oe=62E9F2AF&_nc_sid=5cbaad',
-            user_name: "bursaharunburak",
-            stories: [
-                {
-                    story_id: 1,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/279077000_165685705821499_5895923453112369210_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=BtEiHxT8K4wAX9Cy9zF&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MjgyNDI5NzAxOTg3MzEwNzgzNw%3D%3D.2-ccb7-5&oh=00_AT9lNj4uAbiR08zxCV655qEHSsOkJIJwJhhNBdu8VBtbqw&oe=62E9EDB7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                },
-                {
-                    story_id: 2,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 2 swiped'),
-                },
-                {
-                    story_id: 3,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                },
-            ]
-        },
-        {
-            user_id: 1,
-            user_image: 'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/240936026_508945976807276_3878467107109739721_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=tviEQGwQpCIAX-YR6pg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT9Ea9hI2ve_bZEoXmcwlla819vuOHsO-ywfSw1yM7z1ag&oe=62E9BFE7&_nc_sid=8fd12b',
-            user_name: "ilhan.ers",
-            stories: [
-                {
-                    story_id: 1,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                },
-                {
-                    story_id: 2,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/279077000_165685705821499_5895923453112369210_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=BtEiHxT8K4wAX9Cy9zF&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MjgyNDI5NzAxOTg3MzEwNzgzNw%3D%3D.2-ccb7-5&oh=00_AT9lNj4uAbiR08zxCV655qEHSsOkJIJwJhhNBdu8VBtbqw&oe=62E9EDB7&_nc_sid=30a2ef",
-                    wipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                }]
-        },
-        {
-            user_id: 2,
-            user_image: 'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/244692226_282680550394602_6025779403371137870_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=44-FvdYjgbEAX-_Szb0&tn=KRN-Xfh86jfLlR-R&edm=AHG7ALcBAAAA&ccb=7-5&oh=00_AT-KQ6eve8XlDWxugKoKkKeNXpL0MQA8otStTuK7-jQySQ&oe=62E9F2AF&_nc_sid=5cbaad',
-            user_name: "bursaharunburak",
-            stories: [
-                {
-                    story_id: 1,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/279077000_165685705821499_5895923453112369210_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=BtEiHxT8K4wAX9Cy9zF&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MjgyNDI5NzAxOTg3MzEwNzgzNw%3D%3D.2-ccb7-5&oh=00_AT9lNj4uAbiR08zxCV655qEHSsOkJIJwJhhNBdu8VBtbqw&oe=62E9EDB7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                },
-                {
-                    story_id: 2,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 2 swiped'),
-                },
-                {
-                    story_id: 3,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                },
-            ]
-        },
-        {
-            user_id: 1,
-            user_image: 'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/240936026_508945976807276_3878467107109739721_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=tviEQGwQpCIAX-YR6pg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT9Ea9hI2ve_bZEoXmcwlla819vuOHsO-ywfSw1yM7z1ag&oe=62E9BFE7&_nc_sid=8fd12b',
-            user_name: "ilhan.ers",
-            stories: [
-                {
-                    story_id: 1,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                },
-                {
-                    story_id: 2,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/279077000_165685705821499_5895923453112369210_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=BtEiHxT8K4wAX9Cy9zF&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MjgyNDI5NzAxOTg3MzEwNzgzNw%3D%3D.2-ccb7-5&oh=00_AT9lNj4uAbiR08zxCV655qEHSsOkJIJwJhhNBdu8VBtbqw&oe=62E9EDB7&_nc_sid=30a2ef",
-                    wipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                }]
-        },
-        {
-            user_id: 2,
-            user_image: 'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/244692226_282680550394602_6025779403371137870_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=44-FvdYjgbEAX-_Szb0&tn=KRN-Xfh86jfLlR-R&edm=AHG7ALcBAAAA&ccb=7-5&oh=00_AT-KQ6eve8XlDWxugKoKkKeNXpL0MQA8otStTuK7-jQySQ&oe=62E9F2AF&_nc_sid=5cbaad',
-            user_name: "bursaharunburak",
-            stories: [
-                {
-                    story_id: 1,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/279077000_165685705821499_5895923453112369210_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=BtEiHxT8K4wAX9Cy9zF&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MjgyNDI5NzAxOTg3MzEwNzgzNw%3D%3D.2-ccb7-5&oh=00_AT9lNj4uAbiR08zxCV655qEHSsOkJIJwJhhNBdu8VBtbqw&oe=62E9EDB7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                },
-                {
-                    story_id: 2,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 2 swiped'),
-                },
-                {
-                    story_id: 3,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                },
-            ]
-        },
-        {
-            user_id: 1,
-            user_image: 'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/240936026_508945976807276_3878467107109739721_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=tviEQGwQpCIAX-YR6pg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT9Ea9hI2ve_bZEoXmcwlla819vuOHsO-ywfSw1yM7z1ag&oe=62E9BFE7&_nc_sid=8fd12b',
-            user_name: "ilhan.ers",
-            stories: [
-                {
-                    story_id: 1,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                },
-                {
-                    story_id: 2,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/279077000_165685705821499_5895923453112369210_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=BtEiHxT8K4wAX9Cy9zF&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MjgyNDI5NzAxOTg3MzEwNzgzNw%3D%3D.2-ccb7-5&oh=00_AT9lNj4uAbiR08zxCV655qEHSsOkJIJwJhhNBdu8VBtbqw&oe=62E9EDB7&_nc_sid=30a2ef",
-                    wipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                }]
-        },
-        {
-            user_id: 2,
-            user_image: 'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/244692226_282680550394602_6025779403371137870_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=44-FvdYjgbEAX-_Szb0&tn=KRN-Xfh86jfLlR-R&edm=AHG7ALcBAAAA&ccb=7-5&oh=00_AT-KQ6eve8XlDWxugKoKkKeNXpL0MQA8otStTuK7-jQySQ&oe=62E9F2AF&_nc_sid=5cbaad',
-            user_name: "bursaharunburak",
-            stories: [
-                {
-                    story_id: 1,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/279077000_165685705821499_5895923453112369210_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=BtEiHxT8K4wAX9Cy9zF&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MjgyNDI5NzAxOTg3MzEwNzgzNw%3D%3D.2-ccb7-5&oh=00_AT9lNj4uAbiR08zxCV655qEHSsOkJIJwJhhNBdu8VBtbqw&oe=62E9EDB7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                },
-                {
-                    story_id: 2,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 2 swiped'),
-                },
-                {
-                    story_id: 3,
-                    story_image: "https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-15/292416937_5489123251130525_92558065084481252_n.jpg?stp=dst-jpg_e35_p480x480&cb=2d435ae8-326fec31&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=QHimw6BysywAX_tOLPN&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=Mjg3NzIwNjIxMTUxMjEwNjk2MA%3D%3D.2-ccb7-5&oh=00_AT_EY2hRn1fKwHMOvOTdShXjiuRX_XHXZmCu-UU30JkUkw&oe=62E9BFA7&_nc_sid=30a2ef",
-                    swipeText:'Custom swipe text for this story',
-                    onPress: () => console.log('story 1 swiped'),
-                },
-            ]
-        },
-        
+        }
     ];
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => {setRefreshing(false)});
+    }, []);
+
+    const testData = new Array(10).fill(
+        {
+            user_image: faker.image.image(300,400,true),
+            user_name: faker.internet.userName(),
+            stories: [
+                {
+                    story_image: faker.image.abstract(1200,1200,true),
+                    swipeText:'Custom swipe text for this story',
+                    onPress: () => console.log('story 1 swiped'),
+                },
+                {
+                    story_image: faker.image.abstract(1200,1200,true),
+                    wipeText:'Custom swipe text for this story',
+                    onPress: () => console.log('story 1 swiped'),
+                }]
+        }
+    )
+
+
+    console.log(testData);
 
     return (
         <>
             <BottomSheet hasDraggableIcon ref={bottomSheet} height={'400'}>
-                <View style={{width:'100%',backgroundColor:'red',height:100,marginTop:10}}>
-                    
-                </View>
+                <PostMore />
             </BottomSheet>
 
             <Swiper index={index} loop={false} showsPagination={false} style={{paddingTop:30, backgroundColor:'#fff'}}>
                 <View>
                     <Header />
-                    <ScrollView style={{height:'100%'}}>
-                        {!true 
-                            ? 
-                            <Stories />
-                            :
-                            <InstaStory data={data}
-                                duration={10}
-                                onStart={item => console.log(item)}
-                                onClose={item => console.log('close: ', item)}
-                                customSwipeUpComponent={<BottomComponent />}
-                            />}
+                    <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>} style={{height:'100%'}}>
+                        
+                        <InstaStory data={testData}
+                            duration={10}
+                            onStart={item => console.log(item)}
+                            onClose={item => console.log('close: ', item)}
+                            customSwipeUpComponent={<BottomComponent />}
+                        />
 
                         {posts.map((post) => <Post bottomSheet={bottomSheet} navigation={navigation} setShowComments={setShowComments} post={post} /> )}
                     </ScrollView>
                 </View>
 
                 <View>
-                    <DirectMessage />
+                    <DirectMessage navigation={navigation} />
                 </View>
 
             </Swiper> 
+
+            {false && <View style={{backgroundColor:'black',position:'absolute',height:'100%',width:'100%',opacity:0.4}} />}
+
         </>
     );
 
@@ -240,21 +114,28 @@ export default HomeScreen;
 
 
 const BottomComponent = () => {
+    
+    const sendStory = useRef();
 
     return(
+
         <View style={styles.bottomComponent}>
+            <BottomSheet hasDraggableIcon ref={sendStory} height={'610'}>
+                <SendStory />
+            </BottomSheet>
             <View style={styles.inputContainer}>
                 <TextInput style={styles.sendMessage} placeholder="Search" placeholderTextColor="#fff" />
                 <View style={{flexDirection:'row'}}>
                     <TouchableOpacity style={{marginLeft:10}}>
-                        <HearthReels size={24} />
+                        <HearthReels size={26} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft:10}}>
-                        <MessageReels size={24} />
+                    <TouchableOpacity onPress={() => sendStory.current.show()} style={{marginLeft:20}}>
+                        <MessageReels size={26} />
                     </TouchableOpacity>
                 </View>
             </View>
         </View>
+
     ) 
 }
 

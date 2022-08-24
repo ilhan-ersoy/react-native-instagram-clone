@@ -4,41 +4,42 @@ import { View, StyleSheet, Button, Text, Image } from 'react-native';
 import { Video, AVPlaybackStatus } from 'expo-av';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import ReelsVideoBanner from './ReelsVideoBanner';
 
-const ReelsVideoT = () => {
+const ReelsVideoI = ({postView}) => {
 
-    const video = React.useRef(null);
-    const [status, setStatus] = React.useState({});
+    const video = useRef(null);
+    const [status, setStatus] = useState({});
     const [mute, setMute] = useState(false);
+
+    useEffect(() => {
+      video.current.pauseAsync();
+    }, []);
+
+
 
     return (
         <TouchableOpacity activeOpacity={1} 
-        onPress={() =>
-            status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
-        }
+              style={{zIndex:99}}
+              onLongPress = {()=>video.current.pauseAsync()}
+              onPressOut={()=>video.current.playAsync()}
+              onPress={()=>setMute(!mute)}
             >
            
                 <Video
                     shouldPlay={true}
                     ref={video}
                     style={styles.video}
-                    source={require(`../../data/reels2.mp4`)}
+                    source={require(`../../assets/video/reels4.mp4`)}
                     resizeMode={'cover'}
                     isLooping
                     onPlaybackStatusUpdate={status => setStatus(() => status)}
                     volume={mute ? 0 : 1}
-                    
                 >
-                    <View style={{flex:1,justifyContent:'space-between',zIndex:99}}>
-                        <View style={styles.storyHeader}>
-                            <Text style={{fontSize:24,zIndex:99,fontWeight:'700',color:'#fff'}}>Reels</Text>
-                            <View style={{alignSelf:'center',justifyContent:'center'}}>
-                                <Text style={{fontSize:24,zIndex:99,fontWeight:'700',color:'#fff'}}>{mute ? 'MUTE X' : ''}</Text>
-                            </View> 
-                        </View>
-                    </View>
+                  <ReelsVideoBanner postView={postView} mute={mute} photo={'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/25008450_723325174522045_2932113532335947776_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=1&_nc_ohc=VQEMvCUBHhEAX85AENu&edm=AEF8tYYBAAAA&ccb=7-5&oh=00_AT9pBdlPOdO-rCbLhBA-kCtnDXU3cFypReJX-tmoXL4CRg&oe=62EDF3B8&_nc_sid=a9513d'} username={'bolek_3d'} desc={'Unknown Place No. 8'} music={'bolek_3d'} likes={'153.2k'} comments={'3.344'} />
                 </Video>
+                
         </TouchableOpacity>
     )
 }
@@ -65,4 +66,4 @@ const styles = StyleSheet.create({
     paddingVertical:20
   }
 });
-export default ReelsVideoT;
+export default ReelsVideoI;

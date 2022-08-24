@@ -1,34 +1,20 @@
 import {View, Text} from "react-native"
-import { SafeAreaView, StyleSheet, TextInput, Image, TouchableWithoutFeedback } from "react-native";
+import { SafeAreaView, StyleSheet, TextInput, Image, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 import { Carosel, Reels, ReelsFillWhite, Search } from "../../Icons";
 import { faker } from '@faker-js/faker';
 import { ScrollView } from "react-native";
 import { useState } from "react";
-import Content from "../profile/Content";
-import SearchContent from "./SearchContent";
-import Recents from "./Recents";
 
 
 
-const SearchScreen = ({navigation}) => {
+
+const SearchContent = ({navigation}) => {
 
     const [showRecent, setShowRecent] = useState(false);
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView style={{height:'100%'}}>
-                <TouchableWithoutFeedback onPress={()=>setShowRecent(!showRecent)} >
-                    <View style={styles.header}>
-                        <TouchableWithoutFeedback >
-                            <TextInput style={styles.searchInput} placeholder="Search" />
-                        </TouchableWithoutFeedback>
-                        <View style={{position:'absolute',top:22,left:20}}>
-                            <Search size={15}/>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
 
-                <View style={[styles.content,{marginTop:5}]}>
+    return (
+        <View style={[styles.content,{marginTop:5}]}>
                     <View style={{flexDirection:'row'}}>
                         <View style={{width:'65%',alignItems:'center'}}>
                             <View style={{width:'100%',flexDirection:'row'}}>
@@ -115,15 +101,10 @@ const SearchScreen = ({navigation}) => {
                         </View>
                     </View>
         </View>
-
-                
-            </ScrollView>
-            
-        </SafeAreaView>
     )
 }
     
-export default SearchScreen;
+export default SearchContent;
 
 const styles = StyleSheet.create({
     container: {

@@ -1919,6 +1919,14 @@
     "@urql/core" ">=2.3.1"
     wonka "^4.0.14"
 
+"@wwdrew/react-native-numeric-textinput@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@wwdrew/react-native-numeric-textinput/-/react-native-numeric-textinput-1.1.0.tgz#eda05ed25059c895725a029e565656dead1326c1"
+  integrity sha512-snbDuKeO6wSFWhGUxxByayv04VSb2E9o+U0wFHBslCucvIhCqLA23wKzSqeaP4ljlShemVRfZHmoUaJOnEs2AA==
+  dependencies:
+    currency-codes "^1.5.0"
+    intl "^1.2.5"
+
 "@xmldom/xmldom@~0.7.0":
   version "0.7.5"
   resolved "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.7.5.tgz"
@@ -2897,6 +2905,14 @@ csstype@^3.0.2:
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.0.tgz"
   integrity sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==
 
+currency-codes@^1.5.0:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/currency-codes/-/currency-codes-1.5.1.tgz#7ed12dc00be91414937c71855ff5ea6059b88d47"
+  integrity sha512-hqy8vtlIYKzO6pe2TE0V4/riZALIc7nhtE9cvxk5FDRCvfGplgzUvpTmZlMsyO+NeK5U41j+sQXJOo8l8v9kdg==
+  dependencies:
+    first-match "~0.0.1"
+    nub "~0.0.0"
+
 dag-map@~1.0.0:
   version "1.0.2"
   resolved "https://registry.npmjs.org/dag-map/-/dag-map-1.0.2.tgz"
@@ -3518,6 +3534,11 @@ find-yarn-workspace-root@~2.0.0:
   dependencies:
     micromatch "^4.0.2"
 
+first-match@~0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/first-match/-/first-match-0.0.1.tgz#a60ec642700f0f437234ebb7ec3f382476e542fd"
+  integrity sha512-VvKbnaxrC0polTFDC+teKPTdl2mn6B/KUW+WB3C9RzKDeNwbzfLdnUz3FxC+tnjvus6bI0jWrWicQyVIPdS37A==
+
 flow-parser@0.*:
   version "0.181.0"
   resolved "https://registry.npmjs.org/flow-parser/-/flow-parser-0.181.0.tgz"
@@ -3953,6 +3974,11 @@ internal-ip@4.3.0:
   dependencies:
     default-gateway "^4.2.0"
     ipaddr.js "^1.9.0"
+
+intl@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/intl/-/intl-1.2.5.tgz#82244a2190c4e419f8371f5aa34daa3420e2abde"
+  integrity sha512-rK0KcPHeBFBcqsErKSpvZnrOmWOj+EmDkyJ57e90YWaQNqbcivcqmKDlHEeNprDWOsKzPsh1BfSpPQdDvclHVw==
 
 invariant@*, invariant@^2.2.4:
   version "2.2.4"
@@ -5195,6 +5221,11 @@ nth-check@^2.0.1:
   dependencies:
     boolbase "^1.0.0"
 
+nub@~0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/nub/-/nub-0.0.0.tgz#b369bd32bdde66af59605c3b0520bc219dccc04f"
+  integrity sha512-dK0Ss9C34R/vV0FfYJXuqDAqHlaW9fvWVufq9MmGF2umCuDbd5GRfRD9fpi/LiM0l4ZXf8IBB+RYmZExqCrf0w==
+
 nullthrows@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/nullthrows/-/nullthrows-1.1.1.tgz"
@@ -5655,6 +5686,11 @@ rc@~1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-currency-input-field@^3.6.4:
+  version "3.6.4"
+  resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-3.6.4.tgz#8063f9a445ba246063f0254ced4015210c90593a"
+  integrity sha512-0SifhqMirGt5+inzHslfbf71ZYoBt420pkMM6oBSGS40CsuPcLIOV19B1LPSCz7dWPGYi/kw5TOFQ0qALrn6Wg==
+
 react-devtools-core@^4.23.0:
   version "4.24.7"
   resolved "https://registry.npmjs.org/react-devtools-core/-/react-devtools-core-4.24.7.tgz"
@@ -5701,6 +5737,16 @@ react-native-codegen@^0.0.17:
     flow-parser "^0.121.0"
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
+
+react-native-currency-input@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-currency-input/-/react-native-currency-input-1.0.1.tgz#3118a0d5347dd29568c5031320dbeb34be43415c"
+  integrity sha512-1AbXXMAyNBEV2M0snh6e/B1w+rxRBgu9IARVaeF0tkUuaGX4kl/tQVXzyNa0fV2GX89U8Hyb0HaMvjaIZGniAA==
+
+react-native-double-tap@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-double-tap/-/react-native-double-tap-1.0.1.tgz#d4235a77e594ca83665fd96049f0bdf8266e4754"
+  integrity sha512-tDhQv9IJnH4a5tPTQVBzvwcDo9+6a1Xz1JiFbqfORk9fkBnopx+1T2ZdTIUAvgxuUgdbwIRWnSzE3IIkmkeKFw==
 
 react-native-gesture-bottom-sheet@^1.1.0:
   version "1.1.0"
@@ -5884,6 +5930,13 @@ react-native@0.68.2:
     use-subscription ">=1.0.0 <1.6.0"
     whatwg-fetch "^3.0.0"
     ws "^6.1.4"
+
+react-number-format@^4.9.3:
+  version "4.9.3"
+  resolved "https://registry.yarnpkg.com/react-number-format/-/react-number-format-4.9.3.tgz#338500fe9c61b1ac73c8d6dff4ec97dd13fd2b50"
+  integrity sha512-am1A1xYAbENuKJ+zpM7V+B1oRTSeOHYltqVKExznIVFweBzhLmOBmyb1DfIKjHo90E0bo1p3nzVJ2NgS5xh+sQ==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-redux@^8.0.2:
   version "8.0.2"
