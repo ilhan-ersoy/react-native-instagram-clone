@@ -28,7 +28,7 @@ function ProfileScreen({navigation}) {
                             </TouchableOpacity>
                         </View>
                         <View style={{flexDirection:'row',alignItems:'center'}}>
-                            <TouchableOpacity style={{marginRight:20}}>
+                            <TouchableOpacity activeOpacity={0.6} style={{marginRight:20}}>
                                 <Plus size={30} />
                             </TouchableOpacity>
                             

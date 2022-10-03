@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from "./screens/home";
 import ProfileScreen from "./screens/profile/Profile";
 import ShopScreen from "./screens/shop/Shop";
 import ReelsScreen from "./screens/Reels";
@@ -8,6 +7,7 @@ import { StyleSheet, Image } from 'react-native';
 import SearchScreen from './screens/search/SearchScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import ExploreScreen from './screens/explore/explore';
+import HomeScreen from './screens/home';
 
 
 
@@ -38,7 +38,6 @@ function AppScreens() {
                         }
                         return <Home size={30} color={color} />
                     },
-                    tabBarStyle: {display:`${show && 'none'}`},
                 }}
                 
             />

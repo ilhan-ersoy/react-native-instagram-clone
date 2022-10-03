@@ -12,7 +12,7 @@ export default function ReelScreen() {
   return (
     <Swiper loop={false} horizontal={false} showsPagination={false}>
       <View>
-        <ReelsVideo postView={false}/>
+        <ReelsVideo postView={false} />
       </View>
       {/*<View>
         <ReelsVideoI postView={false}/>

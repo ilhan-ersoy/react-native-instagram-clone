@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     postHeader: {
         flexDirection:'row',
         alignItems:'center',
-        justifyContent:'start',
+        justifyContent:'flex-start',
         paddingHorizontal:18,
         paddingVertical:10,
         borderTopLeftRadius:20,
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     bottom: {
         flexDirection:'row',
         alignItems:'center',
-        justifyContent:'start',
+        justifyContent:'flex-start',
         backgroundColor:'#efefef',
         paddingHorizontal:12,
         paddingVertical:6,

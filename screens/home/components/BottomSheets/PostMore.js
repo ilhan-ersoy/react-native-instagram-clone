@@ -110,6 +110,6 @@ const styles = StyleSheet.create({
     textBorder: {
         borderTopWidth:0.5,
         borderBottomWidth:0.5,
-        opacity:0.2,
+
     }
 });

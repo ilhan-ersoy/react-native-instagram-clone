@@ -31,10 +31,10 @@ const ReelsVideoBanner = ({mute,postView,username,photo,desc,music,likes,comment
                     <View style={styles.storyHeader}>
                         <View style={styles.containerLeft}>
                             <TouchableOpacity onPress={()=>setMute(true)}>
-                                <Text style={{fontSize:24,zIndex:99,fontWeight:'700',color:'#fff'}}>Reels</Text>
+                                <Text style={{fontSize:24,zIndex:99,fontWeight:700,color:'#fff'}}>Reels</Text>
                             </TouchableOpacity>
                            
-                            <View style={[styles.reelsInfoContainer,{opacity:`${reelsOpacity ? 0.6 : 1}`}]}>
+                            <View style={[styles.reelsInfoContainer,{opacity:1}]}>
                                 <View style={styles.reelsInfo}>
                                     <Image
                                         style={styles.avatar}
@@ -45,7 +45,7 @@ const ReelsVideoBanner = ({mute,postView,username,photo,desc,music,likes,comment
                                         {username}
                                     </Text>
                                     
-                                    <TouchableOpacity onPress={() => setFollow(!follow)} style={[styles.followButton,{opacity:`${reelsOpacity ? 0.6 : 1}`}]}>
+                                    <TouchableOpacity onPress={() => setFollow(!follow)} style={[styles.followButton,{opacity:1}]}>
                                         <Text style={{color:'#fff',fontWeight:'700'}}>
                                             {follow ? 'Follow' : 'Unfollow'}
                                         </Text>
@@ -77,7 +77,7 @@ const ReelsVideoBanner = ({mute,postView,username,photo,desc,music,likes,comment
                                     <Camera width={12}/>
                                 </View>
                                 <View style={[styles.reelsLeft]}>
-                                    <TouchableOpacity style={{alignItems:'center',marginVertical:2,opacity:`${reelsOpacity ? 0.1 : 0}`}}>
+                                    <TouchableOpacity style={{alignItems:'center',marginVertical:2,opacity:1}}>
                                         <HearthReels  size={28} />
                                         <Text style={{fontSize:14, fontWeight:'700', color:'#fff', marginTop:10}}>{likes}</Text>
                                     </TouchableOpacity>
@@ -134,7 +134,7 @@ const ReelsVideoBanner = ({mute,postView,username,photo,desc,music,likes,comment
                                         <Text>...</Text>
                                     </TouchableOpacity>
                                     <Image
-                                        style={[styles.avatarLeft,{opacity:`${reelsOpacity ? 0.6 : 1}`}]}
+                                        style={[styles.avatarLeft,{opacity:1}]}
                                         source={{
                                         uri:'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/289329021_552196606376038_7855624414260327761_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=1&_nc_ohc=fmk74a_IsTUAX_N_OPm&edm=AEF8tYYBAAAA&ccb=7-5&oh=00_AT_IWyy-HIFw5-VCN2uMSmhMqhbX_K1Vw4hOhThMjc11Zg&oe=62EE95EB&_nc_sid=a9513d'
                                     }}/>

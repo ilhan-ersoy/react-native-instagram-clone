@@ -7,11 +7,12 @@ import { useState } from "react";
 import CommentsScreen from './screens/comments/Comments';
 import OtherProfileScreen from './screens/profile/Other/Other';
 import store from "./redux/store"
-import {Provider} from "react-redux";
-import {useDispatch, useSelector} from "react-redux";
+import { Provider } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setShow, show } from "./redux/appSlice";
 import ExploreScreen from './screens/explore/explore';
 import MessageScreen from './screens/message/message';
+import Home from './Home';
 
 export default function App() {
 
@@ -23,52 +24,54 @@ export default function App() {
 
   return (
     //<SafeAreaView style={{flex:1}}>
-        <Provider store={store}>
-          <NavigationContainer>
-            <Stack.Navigator
-                screenOptions={{headerShown:false}}
-              >
-                
-                <Stack.Screen 
-                  name="Home" 
-                  component={AppScreens} />
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{ headerShown: false }}
+        >
 
-                <Stack.Screen 
-                  name="Login" 
-                  component={LoginScreen} />
+          <Stack.Screen
+            name="Home"
+            component={AppScreens} />
 
-                <Stack.Screen 
-                  name="Comments" 
-                  component={CommentsScreen} />
+          <Stack.Screen
+            name="Comments"
+            component={CommentsScreen} />
 
-                <Stack.Screen 
-                  name="OtherProfile" 
-                  component={OtherProfileScreen} />
+          <Stack.Screen
+            name="OtherProfile"
+            component={OtherProfileScreen} />
 
 
-                <Stack.Screen 
-                  name="Explore" 
-                  component={ExploreScreen} />
+          {/*<Stack.Screen
+            name="Login"
+            component={LoginScreen} />
 
 
-                <Stack.Screen 
-                  name="Message" 
-                  component={MessageScreen} />            
-                  
-            </Stack.Navigator>
-          </NavigationContainer>
-        </Provider>
+
+
+          <Stack.Screen
+            name="Explore"
+            component={ExploreScreen} />
+
+
+          <Stack.Screen
+            name="Message"
+            component={MessageScreen} /> */}
+
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
     //</SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   postOptions: {
-      width:'100%',
-      height:'30%',
-      backgroundColor:'red',
-      position:'absolute',
-      bottom:0
+    width: '100%',
+    height: '30%',
+    backgroundColor: 'red',
+    position: 'absolute',
+    bottom: 0
   }
 });
-
