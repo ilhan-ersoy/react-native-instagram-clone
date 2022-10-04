@@ -1,7 +1,6 @@
 import { View } from "react-native"
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { StyleSheet, ScrollView, TextInput, Text, RefreshControl } from 'react-native';
-
+import { StyleSheet, ScrollView, TextInput, Text, RefreshControl, AppRegistry } from 'react-native';
 import Header from "./components/Header";
 import Post from "./components/Post";
 import Stories from "./components/Stories";
@@ -16,6 +15,9 @@ import BottomSheet from "react-native-gesture-bottom-sheet";
 import PostMore from "./components/BottomSheets/PostMore";
 import SendStory from "./components/InstaStory/SendStory";
 import { faker } from "@faker-js/faker";
+import Snap from "../snap/Snap";
+
+
 
 const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
@@ -81,25 +83,26 @@ const HomeScreen = ({ navigation }) => {
             </BottomSheet>
 
             <Swiper index={index} loop={false} showsPagination={false} style={{ paddingTop: 30, backgroundColor: '#fff' }}>
+
+                <View>
+                    <Snap />
+                </View>
+
                 <View>
                     <Header />
                     <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} style={{ height: '100%' }}>
-
                         <InstaStory data={testData}
                             duration={10}
                             onStart={item => console.log(item)}
                             onClose={item => console.log('close: ', item)}
                             customSwipeUpComponent={<BottomComponent />}
                         />
-
                         {posts.map((post) => <Post bottomSheet={bottomSheet} navigation={navigation} setShowComments={setShowComments} post={post} />)}
                     </ScrollView>
                 </View>
 
                 <View>
-                    <Text>
-                        2
-                    </Text>
+                    <DirectMessage setIndex={setIndex} navigation={navigation} />
                 </View>
 
             </Swiper>
@@ -108,12 +111,9 @@ const HomeScreen = ({ navigation }) => {
 
         </>
     );
-
-
 }
 
 export default HomeScreen;
-
 
 const BottomComponent = () => {
 

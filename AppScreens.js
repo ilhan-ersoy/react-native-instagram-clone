@@ -9,8 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import ExploreScreen from './screens/explore/explore';
 import HomeScreen from './screens/home';
 
-
-
 const Tab = createBottomTabNavigator();
 
 function AppScreens() {
@@ -38,8 +36,7 @@ function AppScreens() {
                         }
                         return <Home size={30} color={color} />
                     },
-                }}
-                
+                }}  
             />
             <Tab.Screen 
                 name="Profile" 
@@ -94,7 +91,6 @@ function AppScreens() {
                     }
                 }}
             />
-
         </Tab.Navigator>
     )
 }

@@ -1,71 +1,53 @@
-
 import * as React from 'react';
-import { View, StyleSheet, Button, Text, Image } from 'react-native';
-import { Video, AVPlaybackStatus } from 'expo-av';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import Swiper from 'react-native-swiper';
-import { useState, useRef, useEffect } from 'react';
+import { Video } from 'expo-av';
+import { View, StyleSheet, Text, Touchable } from 'react-native';
 import ReelsVideoBanner from './ReelsVideoBanner';
+import { useRef, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { Mute } from '../../Icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const ReelsVideo = ({ postView }) => {
 
-  const video = useRef(null);
-  const [status, setStatus] = useState({});
+const ReelsVideo = ({ postView, navigator }) => {
+
+  const video = useRef();
   const [mute, setMute] = useState(false);
 
-  useEffect(() => {
-    video.current.pauseAsync();
-  }, []);
-
-  const handleMute = () => {
+  const handleClick = () => {
     setMute(!mute);
-    console.log('clicked')
   }
 
   return (
-    <TouchableOpacity activeOpacity={1}
-      onLongPress={() => video.current.pauseAsync()}
-      onPressOut={() => video.current.playAsync()}
-      onPress={() => handleMute()}
-    >
+    <SafeAreaView style={styles.container}>
       <Video
-        shouldPlay={true}
         ref={video}
-        style={styles.video}
         source={require(`../../assets/video/reels3.mp4`)}
-        resizeMode={'cover'}
+        rate={1.0}
+        volume={1.0}
+        isMuted={mute}
+        resizeMode="cover"
+        shouldPlay
         isLooping
-        onPlaybackStatusUpdate={status => setStatus(() => status)}
-        volume={0}
+        style={{ height: '100%' }}
       >
-
       </Video>
-    </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => handleClick()} activeOpacity={1} style={{ position: 'absolute', zIndex: 97, height: '100%', width: '100%' }}>
+        <ReelsVideoBanner />
+      </TouchableOpacity>
+
+    </SafeAreaView >
   )
 }
 
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-  video: {
-    alignSelf: 'center',
-    width: '100%',
-    height: '100%',
-  },
-  buttons: {
-    flexDirection: 'row',
-    justifyContent: 'center ',
-    alignItems: 'center'
-  },
-  storyHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 20
+    flex: 1,
+    position: 'relative'
   }
-});
+})
+
 
 
 export default ReelsVideo;

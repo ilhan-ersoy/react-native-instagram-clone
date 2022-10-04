@@ -11,26 +11,13 @@ export default function ReelScreen() {
 
   return (
     <Swiper loop={false} horizontal={false} showsPagination={false}>
-      <View>
+      <View style={{flex:1}}>
         <ReelsVideo postView={false} />
       </View>
-      {/*<View>
-        <ReelsVideoI postView={false}/>
-      </View>*/}
     </Swiper>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  absolute: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0
-  }
+
 });

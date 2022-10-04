@@ -42,6 +42,9 @@ export default function App() {
             name="OtherProfile"
             component={OtherProfileScreen} />
 
+          <Stack.Screen
+            name="Message"
+            component={MessageScreen} />
 
           {/*<Stack.Screen
             name="Login"
@@ -53,11 +56,8 @@ export default function App() {
           <Stack.Screen
             name="Explore"
             component={ExploreScreen} />
+        */}
 
-
-          <Stack.Screen
-            name="Message"
-            component={MessageScreen} /> */}
 
         </Stack.Navigator>
       </NavigationContainer>

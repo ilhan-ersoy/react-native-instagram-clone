@@ -8,7 +8,7 @@ import Swiper, { scrollTo } from 'react-native-swiper';
 import SendStory from "./InstaStory/SendStory";
 import DoubleClick from "react-native-double-tap";
 import { setHomeOpacity } from "../../../redux/appSlice";
-
+import { faker } from "@faker-js/faker";
 
 const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
 
@@ -33,7 +33,6 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
 
     const [sendShort, setSendShort] = useState(true);
 
-
     return (
 
         <View key={post.id}>
@@ -42,7 +41,7 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                     <Image
                         style={styles.avatar}
                         source={{
-                            uri: post.user.avatarImg
+                            uri: faker.image.people()
                         }}
                     />
                     <TouchableOpacity onPress={() => navigation.navigate('OtherProfile')} opacity={0.8}>
@@ -68,13 +67,12 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                             console.log("single tap");
                         }}
                         doubleTap={() => handleLike()}
-
                         delay={200}
                     >
                         <Image
                             style={styles.postImage}
                             source={{
-                                uri: post.postImg
+                                uri: faker.image.food()
                             }}
                         />
                     </DoubleClick>
@@ -91,7 +89,7 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                         <Image
                             style={styles.postImage}
                             source={{
-                                uri: post.postImg
+                                uri: faker.image.food()
                             }}
                         />
                     </DoubleClick>
@@ -141,7 +139,7 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                                     <Image
                                         style={{ width: 44, height: 44, borderRadius: 100, marginLeft: 13, borderWidth: 1, borderColor: '#CACACA' }}
                                         source={{
-                                            uri: post.user.avatarImg,
+                                            uri: faker.image.people(),
                                         }} />
                                 )}
 
