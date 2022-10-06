@@ -33,7 +33,7 @@ const ReelsVideo = ({ postView, navigator }) => {
       </Video>
 
       <TouchableOpacity onPress={() => handleClick()} activeOpacity={1} style={{ position: 'absolute', zIndex: 97, height: '100%', width: '100%' }}>
-        <ReelsVideoBanner />
+        <ReelsVideoBanner mute={mute} />
       </TouchableOpacity>
 
     </SafeAreaView >

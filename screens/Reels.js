@@ -11,7 +11,7 @@ export default function ReelScreen() {
 
   return (
     <Swiper loop={false} horizontal={false} showsPagination={false}>
-      <View style={{flex:1}}>
+      <View style={{ flex: 1 }}>
         <ReelsVideo postView={false} />
       </View>
     </Swiper>
