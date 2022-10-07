@@ -59,7 +59,7 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
             <View style={{ position: 'absolute', top: '30%', right: '40%', zIndex: 999, opacity: 0 }}>
                 <HearthLike size={64} />
             </View>
-
+            
             <Swiper onIndexChanged={(e) => setCurrentIndex(e)} loop={false} showsPagination={false} style={{ height: 350 }}>
                 <View>
                     <DoubleClick

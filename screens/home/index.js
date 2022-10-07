@@ -83,11 +83,6 @@ const HomeScreen = ({ navigation }) => {
             </BottomSheet>
 
             <Swiper index={index} loop={false} showsPagination={false} style={{ paddingTop: 30, backgroundColor: '#fff' }}>
-
-                <View>
-                    <Snap />
-                </View>
-
                 <View>
                     <Header />
                     <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} style={{ height: '100%' }}>
