@@ -7,6 +7,7 @@ import { TouchableOpacity, Image } from "react-native";
 import { Mute } from "../../Icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BottomSheet from "react-native-gesture-bottom-sheet";
+import ReelsComments from "./ReelsComments";
 const ReelsVideo = ({ postView, navigator }) => {
   const video = useRef();
   const [mute, setMute] = useState(false);
@@ -15,69 +16,61 @@ const ReelsVideo = ({ postView, navigator }) => {
   const bottomSheet = useRef();
 
   const handleClick = () => {
-    setMute(!mute);
+    if (!showComments) setMute(!mute);
+    setShowComments(false)
   };
 
-  useEffect(() => {
-    setMute(true);
-  }, []);
+  useEffect(() => setMute(true), []);
 
-
-  console.log("====================================");
-  console.log(bottomSheet.current.props);
-  console.log("====================================");
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity
-        style={{ backgroundColor: "white", zIndex: 99 }}
-        onPress={() => bottomSheet.current.show()}
-      >
-        <Text>CLICK</Text>
-      </TouchableOpacity>
-      <Video
-        ref={video}
-        source={require(`../../assets/video/reels3.mp4`)}
-        rate={1.0}
-        volume={1.0}
-        isMuted={mute}
-        resizeMode="contain"
-        shouldPlay
-        isLooping
-        style={{ height: "50%" }}
-      ></Video>
+      <View style={{ flexDirection: 'column', flex: !showComments ? 1 : 2 / 4 }}>
+        <Video
+          ref={video}
+          source={require(`../../assets/video/reels3.mp4`)}
+          rate={1.0}
+          volume={1.0}
+          isMuted={mute}
+          resizeMode={showComments ? "contain" : "cover"}
+          shouldPlay
+          isLooping
+          style={{ height: '100%' }}
+        ></Video>
 
-      <TouchableOpacity
-        onPress={() => handleClick()}
-        activeOpacity={1}
-        style={{
-          position: "absolute",
-          zIndex: 97,
-          height: "100%",
-          width: "100%",
-        }}
-      >
-        <ReelsVideoBanner mute={mute} bottomSheet={showComments} />
-        {false && (
-          <View
-            style={{
-              position: "absolute",
-              top: "50%",
-              right: "45%",
-            }}
-          >
-            <Image
-              style={{ width: 75, height: 75 }}
-              source={{
-                uri: "https://imgur.com/rksyGE8.png",
-              }}
-            />
+        <TouchableOpacity
+          onPress={() => handleClick()}
+          activeOpacity={1}
+          style={{
+            position: "absolute",
+            zIndex: 97,
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          {!showComments && <ReelsVideoBanner mute={mute} showComments={showComments} setShowComments={setShowComments} />}
+          <View>
           </View>
-        )}
-      </TouchableOpacity>
-      <View style={{ flex: 1 }}>
-        <BottomSheet hasDraggableIcon ref={bottomSheet} height={370} />
+          {false && (
+            <View
+              style={{
+                position: "absolute",
+                top: "50%",
+                right: "45%",
+                zIndex: 99,
+              }}
+            >
+              <Image
+                style={{ width: 75, height: 75 }}
+                source={{
+                  uri: "https://imgur.com/rksyGE8.png",
+                }}
+              />
+            </View>
+          )}
+        </TouchableOpacity>
       </View>
+      {showComments && <ReelsComments />}
     </SafeAreaView>
   );
 };

@@ -7,6 +7,7 @@ import { Hearth, More, Comment, Message, BookMark, DropDown, LeftArrow, Plus, Si
 import { LinearGradient } from 'expo-linear-gradient';
 import SingleComment from "./SingleComment";
 import { faker } from "@faker-js/faker";
+import React from "react";
 
 
 const CommentsScreen = ({setShowComments,navigation}) => {

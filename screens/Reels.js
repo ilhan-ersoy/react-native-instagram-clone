@@ -14,7 +14,6 @@ export default function ReelScreen() {
       <View style={{ flex: 1 }}>
         <ReelsVideo postView={false} />
       </View>
-      
     </Swiper>
   );
 }

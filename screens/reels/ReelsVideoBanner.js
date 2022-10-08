@@ -9,16 +9,28 @@ import { Camera, HearthReels, MessageReels, Mute, UnMute, CommentReels, LeftArro
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setReelsOpacity, setShow } from '../../redux/appSlice';
-import SendStory from '../home/components/InstaStory/SendStory';
+import SendStory from '../home/components/InstaStory/SendStory'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { Keyframe } from 'react-native-reanimated';
 import { faker } from '@faker-js/faker';
-const ReelsVideoBanner = ({ mute, bottomSheet }) => {
 
+const ReelsVideoBanner = ({ mute, setShowComments, showComments }) => {
+    //@ts-ignore
     const reelsOpacity = useSelector(state => state.app.reelsOpacity);
+    //@ts-ignore
     const show = useSelector(state => state.app.show);
     const dispatch = useDispatch();
+    const [follow, setFollow] = useState(false);
+    const [like, setLike] = useState(false);
+    const [showMute, setShowMute] = useState(false);
+
+
+    useEffect(() => {
+        setShowMute(true)
+        setTimeout(() => setShowMute(false), 800)
+    }, [mute])
+
 
     return (
         <View style={styles.container}>
@@ -32,25 +44,27 @@ const ReelsVideoBanner = ({ mute, bottomSheet }) => {
                             Reels {mute ? 'muted' : ''}
                         </Text>
                     </View>
-                    <View style={{ height: 65, flexDirection: 'column' }}>
+                    <View style={{ height: 85, flexDirection: 'column' }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Image style={{ width: 32, height: 32, borderRadius: 100 }} source={{
                                 uri: faker.image.sports(200, 400, true)
                             }} />
                             <Text style={{ marginLeft: 9, color: '#fff', fontSize: 12, fontWeight: '700' }}>pyromx11</Text>
-                            <TouchableOpacity onPress={() => alert('left')} style={styles.followButton}>
+                            <TouchableOpacity onPress={() => setFollow(!follow)} style={styles.followButton}>
                                 <Text style={{ fontSize: 12, fontWeight: '500', color: '#fff' }}>
-                                    Follow
+                                    {follow ? 'Following' : 'Follow'}
                                 </Text>
                             </TouchableOpacity>
                         </View>
-                        <View>
+                        <View style={{ marginTop: 4 }}>
                             <Text style={{ color: '#fff', marginTop: 12, fontSize: 12 }}>
                                 Oasyi Patra...
                             </Text>
                         </View>
-                        <View>
-
+                        <View style={{ marginTop: 12 }}>
+                            <Text style={{ color: '#fff', fontSize: 12, }}>
+                                fbatilla • Original Audio
+                            </Text>
                         </View>
                     </View>
                 </View>
@@ -62,27 +76,42 @@ const ReelsVideoBanner = ({ mute, bottomSheet }) => {
                             <Camera size={24} />
                         </TouchableOpacity>
                         <View style={{ flex: 1.5 / 4, flexDirection: 'column', alignItems: 'center' }}>
-                            <TouchableOpacity onPress={() => alert('left')} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center' }}>
-                                {true ? <HeartLikeFilled size={24} /> :
+                            <TouchableOpacity onPress={() => setLike(!like)} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center' }}>
+                                {like ? <HeartLikeFilled size={24} /> :
                                     <HearthLike size={24} />}
                                 <Text style={{ fontSize: 12, color: '#fff', fontWeight: '600', marginTop: 2 }}>
                                     23.1k
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => alert('left')} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center' }}>
+                            <TouchableOpacity onPress={() => setShowComments(true)} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center', marginTop: 16 }}>
                                 <CommentReels size={24} />
                                 <Text style={{ fontSize: 12, color: '#fff', fontWeight: '600', marginTop: 2 }}>
                                     1k
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => alert('left')} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center' }}>
+                            <TouchableOpacity onPress={() => alert('left')} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center', marginTop: 16 }}>
                                 <MessageReels size={24} />
                             </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => alert('left')} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center', marginTop: 16 }}>
+                                <More size={28} color='#fff' />
+                            </TouchableOpacity>
+
+
+                            <View style={{ marginTop: 2 }}>
+                                <Image style={{ width: 32, height: 32, borderRadius: 6, borderWidth: 3, borderColor: '#fff' }} source={{
+                                    uri: faker.image.sports(200, 400, true)
+                                }} />
+                            </View>
 
                         </View>
                     </View>
                 </View>
             </View>
+            {showMute &&
+                <View style={{ position: 'absolute', top: '50%', left: '45%', width: 50, height: 50, backgroundColor: '#262626', borderRadius: 30, justifyContent: 'center', alignItems: 'center' }}>
+                    {mute ? <Mute size={22} /> : <UnMute size={22} />}
+                </View>}
         </View>
     )
 }
@@ -93,14 +122,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flex: 1,
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 10,
     },
     leftSection: {
         width: '100%',
         height: '100%',
         flex: 1 / 2,
         paddingHorizontal: 20,
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        position: 'relative'
 
     },
     rightSection: {
