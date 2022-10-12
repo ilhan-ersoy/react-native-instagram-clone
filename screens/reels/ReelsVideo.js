@@ -8,34 +8,45 @@ import { Mute } from "../../Icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BottomSheet from "react-native-gesture-bottom-sheet";
 import ReelsComments from "./ReelsComments";
-const ReelsVideo = ({ postView, navigator }) => {
+import { setHideTabBar, hideTabBar } from "../../redux/appSlice";
+import { useSelector, useDispatch } from "react-redux";
+
+
+
+
+const ReelsVideo = ({ postView, navigator, index }) => {
   const video = useRef();
   const [mute, setMute] = useState(false);
-  const [showC, setShowC] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const bottomSheet = useRef();
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     if (!showComments) setMute(!mute);
-    setShowComments(false)
+    setShowComments(false);
   };
 
   useEffect(() => setMute(true), []);
 
+  useEffect(() => {
+    dispatch(setHideTabBar(showComments))
+  }, [showComments])
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ flexDirection: 'column', flex: !showComments ? 1 : 2 / 4 }}>
+      <View
+        style={{ flexDirection: "column", flex: !showComments ? 1 : 1.3 / 4 }}
+      >
         <Video
           ref={video}
-          source={require(`../../assets/video/reels3.mp4`)}
+          source={require("../../assets/video/reels2.mp4")}
           rate={1.0}
           volume={1.0}
           isMuted={mute}
           resizeMode={showComments ? "contain" : "cover"}
           shouldPlay
           isLooping
-          style={{ height: '100%' }}
+          style={{ height: "100%" }}
         ></Video>
 
         <TouchableOpacity
@@ -48,9 +59,14 @@ const ReelsVideo = ({ postView, navigator }) => {
             width: "100%",
           }}
         >
-          {!showComments && <ReelsVideoBanner mute={mute} showComments={showComments} setShowComments={setShowComments} />}
-          <View>
-          </View>
+          {!showComments && (
+            <ReelsVideoBanner
+              mute={mute}
+              showComments={showComments}
+              setShowComments={setShowComments}
+            />
+          )}
+          <View></View>
           {false && (
             <View
               style={{

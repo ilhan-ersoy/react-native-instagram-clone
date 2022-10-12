@@ -3,11 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 export const appSlice = createSlice({
     name: 'app',
     initialState: {
-        show:false,
+        show: false,
 
-        reelsOpacity:false,
+        reelsOpacity: false,
 
-        homeOpacity:false
+        homeOpacity: false,
+
+        hideTabBar: false
     },
     reducers: {
         setShow: (state, action) => {
@@ -18,10 +20,13 @@ export const appSlice = createSlice({
         },
         setHomeOpacity: (state, action) => {
             state.homeOpacity = action.payload
+        },
+        setHideTabBar: (state, action) => {
+            state.hideTabBar = action.payload
         }
     }
 })
 
-export const { show, setShow, reelsOpacity, setReelsOpacity,setHomeOpacity,homeOpacity } = appSlice.actions
+export const { show, setShow, reelsOpacity, setReelsOpacity, setHomeOpacity, homeOpacity, hideTabBar, setHideTabBar } = appSlice.actions
 
 export default appSlice.reducer

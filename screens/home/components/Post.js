@@ -3,21 +3,34 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { TextInput, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import BottomSheet from "react-native-gesture-bottom-sheet";
-import { Hearth, More, Comment, Message, BookMark, Verified, HearthLike } from "../../../Icons";
+import { Hearth, More, Comment, Message, BookMark, Verified, HearthLike, Mute, UnMute } from "../../../Icons";
 import Swiper, { scrollTo } from 'react-native-swiper';
 import SendStory from "./InstaStory/SendStory";
 import DoubleClick from "react-native-double-tap";
 import { setHomeOpacity } from "../../../redux/appSlice";
 import { faker } from "@faker-js/faker";
+import React from "react";
+import { Video } from "expo-av";
+import posts from "../../../data/Posts";
 
 const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
-
     const dispatch = useDispatch();
-
     const postBottomSheet = useRef();
+    const [mute, setMute] = useState(false);
+    const [showMute, setShowMute] = useState(false);
 
+    React.useEffect(() => {
+        setShowMute(true)
+        setTimeout(() => setShowMute(false), 850)
+    }, [mute])
+
+    React.useEffect(() => {
+        setMute(true)
+    }, []);
+
+    //@ts-ignore
     const homeOpacity = useSelector(state => state.app.homeOpacity);
 
 
@@ -27,11 +40,11 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
         setShowHeart(true);
         setTimeout(() => {
             setShowHeart(false);
-        }, 1000);
-
+        }, 800);
     }
 
     const [sendShort, setSendShort] = useState(true);
+    const video = useRef();
 
     return (
 
@@ -41,7 +54,7 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                     <Image
                         style={styles.avatar}
                         source={{
-                            uri: faker.image.people()
+                            uri: post.user.avatarImg
                         }}
                     />
                     <TouchableOpacity onPress={() => navigation.navigate('OtherProfile')} opacity={0.8}>
@@ -59,57 +72,52 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
             <View style={{ position: 'absolute', top: '30%', right: '40%', zIndex: 999, opacity: 0 }}>
                 <HearthLike size={64} />
             </View>
-            
+
             <Swiper onIndexChanged={(e) => setCurrentIndex(e)} loop={false} showsPagination={false} style={{ height: 350 }}>
-                <View>
-                    <DoubleClick
-                        singleTap={() => {
-                            console.log("single tap");
-                        }}
-                        doubleTap={() => handleLike()}
-                        delay={200}
-                    >
+                {post.imgs.map((img) => (
+                    <View>
                         <Image
                             style={styles.postImage}
                             source={{
-                                uri: faker.image.food()
+                                uri: img
                             }}
                         />
-                    </DoubleClick>
-                </View>
-
+                    </View>
+                ))}
                 <View>
-                    <DoubleClick
-                        singleTap={() => {
-                            console.log("single tap");
-                        }}
-                        doubleTap={() => handleLike()}
-                        delay={200}
-                    >
-                        <Image
-                            style={styles.postImage}
-                            source={{
-                                uri: faker.image.food()
-                            }}
-                        />
-                    </DoubleClick>
+                    <View>
+                        <TouchableOpacity activeOpacity={1} onPress={() => setMute(!mute)}>
+                            <Video
+                                ref={video}
+                                source={require(`../../../assets/video/reels3.mp4`)}
+                                rate={1.0}
+                                volume={1.0}
+                                isMuted={mute}
+                                resizeMode={"cover"}
+                                shouldPlay
+                                isLooping
+                                style={{ height: "100%" }}
+                            ></Video>
+                            {showMute && <View style={{ position: 'absolute', top: '50%', left: '45%', width: 50, height: 50, backgroundColor: '#262626', borderRadius: 30, justifyContent: 'center', alignItems: 'center' }}>
+                                {mute ? <Mute size={22} /> : <UnMute size={22} />}
+                            </View>}
+                        </TouchableOpacity>
+                    </View>
                 </View>
-
-                <View>
-                    <DoubleClick
-                        singleTap={() => {
-                            console.log("single tap");
-                        }}
-                        doubleTap={() => handleLike()}
-                        delay={200}
-                    >
-                    </DoubleClick>
-                </View>
-
             </Swiper>
-            <View>
 
-            </View>
+            {/*<Swiper style={styles.wrapper} showsButtons={true}>
+                <View style={styles.slide1}>
+                    <Text style={styles.text}>Hello Swiper</Text>
+                </View>
+                <View style={styles.slide2}>
+                    <Text style={styles.text}>Beautiful</Text>
+                </View>
+                <View style={styles.slide3}>
+                    <Text style={styles.text}>And simple</Text>
+                </View>
+            </Swiper>*/}
+
 
 
 

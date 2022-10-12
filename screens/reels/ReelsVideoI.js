@@ -31,7 +31,7 @@ const ReelsVideoI = ({postView}) => {
                     shouldPlay={true}
                     ref={video}
                     style={styles.video}
-                    source={require(`../../assets/video/reels4.mp4`)}
+                    source={require(`../../assets/video/reels2.mp4`)}
                     resizeMode={'cover'}
                     isLooping
                     onPlaybackStatusUpdate={status => setStatus(() => status)}

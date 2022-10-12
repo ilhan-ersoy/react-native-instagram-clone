@@ -9,41 +9,46 @@ import { useDispatch, useSelector } from 'react-redux';
 import ExploreScreen from './screens/explore/explore';
 import HomeScreen from './screens/home';
 
+
 const Tab = createBottomTabNavigator();
 
 function AppScreens() {
 
 
+
     const show = useSelector(state => state.app.show);
+    const showTabBar = useSelector(state => state.app.hideTabBar);
 
 
     return (
         <Tab.Navigator
             screenOptions={{
-                tabBarShowLabel:false,
-                tabBarActiveTintColor:'#000',
-                tabBarInactiveTintColor:'#262626',
+                tabBarShowLabel: false,
+                tabBarActiveTintColor: '#000',
+                tabBarInactiveTintColor: '#262626',
                 headerShown: false,
+                tabBarStyle: { display: showTabBar }
             }}
+
         >
-            <Tab.Screen 
-                name="Home" 
+            <Tab.Screen
+                name="Home"
                 component={HomeScreen}
                 options={{
-                    tabBarIcon: ({focused, size, color}) => {
+                    tabBarIcon: ({ focused, size, color }) => {
                         if (focused) {
                             return <HomeFilled size={26} color={color} />
                         }
                         return <Home size={30} color={color} />
                     },
-                }}  
+                }}
             />
-            <Tab.Screen 
-                name="Profile" 
+            <Tab.Screen
+                name="Profile"
                 component={SearchScreen}
                 options={{
-                    headerTitle:'Search',
-                    tabBarIcon: ({focused, size, color}) => {
+                    headerTitle: 'Search',
+                    tabBarIcon: ({ focused, size, color }) => {
                         if (focused) {
                             return <SearchFilled size={26} color={color} />
                         }
@@ -51,25 +56,26 @@ function AppScreens() {
                     }
                 }}
             />
-            <Tab.Screen 
-                name="Reels" 
+            <Tab.Screen
+                name="Reels"
                 component={ReelsScreen}
                 options={{
-                    headerTitle:'Reels',
-                    tabBarIcon: ({focused, size, color}) => {
+                    headerTitle: 'Reels',
+                    tabBarIcon: ({ focused, size, color }) => {
                         if (focused) {
                             return <ReelsFilled size={26} color={color} />
                         }
                         return <Reels size={36} color={color} />
-                    }
+                    },
+
                 }}
             />
-            <Tab.Screen 
-                name="Shop" 
+            <Tab.Screen
+                name="Shop"
                 component={ShopScreen}
                 options={{
-                    headerTitle:'Shop',
-                    tabBarIcon: ({focused, size, color}) => {
+                    headerTitle: 'Shop',
+                    tabBarIcon: ({ focused, size, color }) => {
                         if (focused) {
                             return <ShopFilled size={30} color={color} />
                         }
@@ -77,33 +83,33 @@ function AppScreens() {
                     }
                 }}
             />
-            <Tab.Screen 
-                name="Search" 
+            <Tab.Screen
+                name="Search"
                 component={ProfileScreen}
                 options={{
-                    tabBarIcon: ({focused, size, color}) => {
+                    tabBarIcon: ({ focused, size, color }) => {
                         return (
                             <Image
-                                style={[styles.profileAvatar, {borderColor: focused ? 'black': 'transparent'}]}
+                                style={[styles.profileAvatar, { borderColor: focused ? 'black' : 'transparent' }]}
                                 source={require('./assets/img/ilhan_ers.jpg')}
                             />
                         )
                     }
                 }}
             />
-        </Tab.Navigator>
+        </Tab.Navigator >
     )
 }
 
 const styles = StyleSheet.create({
     profileAvatar: {
-        width:36,
-        height:36,
-        borderRadius:21,
-        borderWidth:2
+        width: 36,
+        height: 36,
+        borderRadius: 21,
+        borderWidth: 2
     }
 });
- 
+
 export default AppScreens;
 
 

@@ -28,8 +28,10 @@ const ReelsVideoBanner = ({ mute, setShowComments, showComments }) => {
 
     useEffect(() => {
         setShowMute(true)
-        setTimeout(() => setShowMute(false), 800)
+        setTimeout(() => setShowMute(false), 1000)
     }, [mute])
+
+
 
 
     return (
@@ -41,7 +43,7 @@ const ReelsVideoBanner = ({ mute, setShowComments, showComments }) => {
                             <LeftArrow size={24} color={'#fff'} />
                         </TouchableOpacity>
                         <Text style={{ marginLeft: 20, fontWeight: 'bold', fontSize: 22, color: '#fff' }}>
-                            Reels {mute ? 'muted' : ''}
+                            Reels
                         </Text>
                     </View>
                     <View style={{ height: 85, flexDirection: 'column' }}>
@@ -75,7 +77,7 @@ const ReelsVideoBanner = ({ mute, setShowComments, showComments }) => {
                         <TouchableOpacity onPress={() => alert('left')} style={{ zIndex: 99, flex: 1 / 4 }}>
                             <Camera size={24} />
                         </TouchableOpacity>
-                        <View style={{ flex: 1.5 / 4, flexDirection: 'column', alignItems: 'center' }}>
+                        <View style={{ flex: 1.8 / 4, flexDirection: 'column', alignItems: 'center' }}>
                             <TouchableOpacity onPress={() => setLike(!like)} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center' }}>
                                 {like ? <HeartLikeFilled size={24} /> :
                                     <HearthLike size={24} />}
@@ -92,12 +94,9 @@ const ReelsVideoBanner = ({ mute, setShowComments, showComments }) => {
                             <TouchableOpacity onPress={() => alert('left')} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center', marginTop: 16 }}>
                                 <MessageReels size={24} />
                             </TouchableOpacity>
-
                             <TouchableOpacity onPress={() => alert('left')} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center', marginTop: 16 }}>
                                 <More size={28} color='#fff' />
                             </TouchableOpacity>
-
-
                             <View style={{ marginTop: 2 }}>
                                 <Image style={{ width: 32, height: 32, borderRadius: 6, borderWidth: 3, borderColor: '#fff' }} source={{
                                     uri: faker.image.sports(200, 400, true)
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: 20,
     },
     leftSection: {
         width: '100%',
@@ -132,7 +131,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         justifyContent: 'flex-start',
         position: 'relative'
-
     },
     rightSection: {
         width: '100%',
@@ -143,7 +141,7 @@ const styles = StyleSheet.create({
     rightSectionChild: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        paddingRight: 40,
+        paddingRight: 20,
         height: '100%',
     },
     followButton: {

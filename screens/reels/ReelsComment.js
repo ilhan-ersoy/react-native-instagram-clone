@@ -4,35 +4,87 @@ import { View, StyleSheet, Text, Touchable } from "react-native";
 import ReelsVideoBanner from "./ReelsVideoBanner";
 import { useRef, useState, useEffect } from "react";
 import { TouchableOpacity, Image, ScrollView } from "react-native";
-import { LeftArrow, Mute } from "../../Icons";
+import { LeftArrow, Mute, RCLike, RcLikeFilled } from "../../Icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BottomSheet from "react-native-gesture-bottom-sheet";
+import { LinearGradient } from "expo-linear-gradient";
+import { Dimensions } from 'react-native';
 
-const ReelsComment = ({ comment }) => {
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
-      const [x, setX] = useState(false);
 
+
+const ReelsComment = ({ comment, img, username, likeCount }) => {
+      const [like, setLike] = useState(false);
 
       return (
-            <View style={styles.container}>
-                  <TouchableOpacity activeOpacity={1} onPress={() => setX(!x)}>
-                        <Text>
-                              TEST
-                        </Text>
-                  </TouchableOpacity>
-                  <Text>
-                        {comment}
-                        {x ? '1' : '0'}
-                  </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={styles.commentContainer}>
+                        <Image
+                              style={{ width: 38, height: 38, borderRadius: 40, borderWidth: 3, borderColor: '#fff' }}
+                              source={{
+                                    uri: img
+                              }}
+                        />
+                        <View style={{ flexDirection: 'column' }}>
+                              <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 8 }}>
+                                    <Text style={styles.userName}>
+                                          {username}
+                                    </Text>
+                                    <Text style={{ fontSize: 10, opacity: 0.6, fontWeight: '600', marginLeft: 6 }}>
+                                          10h
+                                    </Text>
+                              </View>
+                              <View style={{ marginLeft: 8, marginTop: 10 }}>
+                                    <Text>
+                                          {comment}
+                                    </Text>
+                              </View>
+                              <View style={{ marginLeft: 8, marginTop: 10, flexDirection: 'row' }}>
+                                    <TouchableOpacity activeOpacity={1}>
+                                          <Text style={{ fontSize: 12, opacity: 0.6, fontWeight: '500' }}>
+                                                {likeCount} likes
+                                          </Text>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity activeOpacity={1}>
+                                          <Text style={{ fontSize: 12, marginLeft: 10, opacity: 0.6 }}>
+                                                Reply
+                                          </Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity activeOpacity={1}>
+                                          <Text style={{ fontSize: 12, marginLeft: 10, opacity: 0.6 }}>
+                                                Send
+                                          </Text>
+                                    </TouchableOpacity>
+                              </View>
+                        </View>
+
+                        <TouchableOpacity activeOpacity={1} style={{ position: 'absolute', right: 30, top: 14 }} onPress={() => setLike(!like)}>
+                              {like ? <RcLikeFilled size={12} /> : <RCLike size={12} />}
+                        </TouchableOpacity>
+                  </View>
+
             </View>
       )
 }
 
 
 const styles = StyleSheet.create({
-      container: {
-            height: 50,
-            width: '100%'
+      commentContainer: {
+            marginTop: 20,
+            flexDirection: 'row',
+            width: windowWidth,
+            paddingHorizontal: 10,
+      },
+      profilePic: {
+            width: 32,
+            height: 32
+      },
+      userName: {
+            fontSize: 13,
+            fontWeight: '500',
       }
 })
 

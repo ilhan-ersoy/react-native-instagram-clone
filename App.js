@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, useEffect } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AppScreens from './AppScreens';
 import LoginScreen from './screens/Login/LoginScreen';
@@ -13,6 +13,7 @@ import { setShow, show } from "./redux/appSlice";
 import ExploreScreen from './screens/explore/explore';
 import MessageScreen from './screens/message/message';
 import Home from './Home';
+import { setHideTabBar, hideTabBar } from './redux/appSlice';
 
 export default function App() {
 
@@ -20,6 +21,7 @@ export default function App() {
   const [report, setReport] = useState(false);
 
   const Stack = createNativeStackNavigator();
+ 
 
 
   return (

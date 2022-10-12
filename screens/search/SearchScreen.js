@@ -13,6 +13,8 @@ import { useState } from "react";
 import Content from "../profile/Content";
 import SearchContent from "./SearchContent";
 import Recents from "./Recents";
+import React from "react";
+import { Platform } from "expo-modules-core";
 
 const SearchScreen = ({ navigation }) => {
   const [showRecent, setShowRecent] = useState(false);
@@ -169,6 +171,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    marginTop: Platform.OS === 'android' && 30
   },
   header: {
     flex: 1,

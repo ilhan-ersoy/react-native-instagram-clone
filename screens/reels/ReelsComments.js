@@ -3,7 +3,7 @@ import { Video } from "expo-av";
 import { View, StyleSheet, Text, Touchable } from "react-native";
 import ReelsVideoBanner from "./ReelsVideoBanner";
 import { useRef, useState, useEffect } from "react";
-import { TouchableOpacity, Image, ScrollView } from "react-native";
+import { TouchableOpacity, Image, ScrollView, TextInput } from "react-native";
 import { LeftArrow, Message, MessageReels, Messenger, Mute } from "../../Icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BottomSheet from "react-native-gesture-bottom-sheet";
@@ -13,7 +13,6 @@ import SendStory from "../home/components/InstaStory/SendStory";
 import { LinearGradient } from "expo-linear-gradient";
 
 const ReelsComments = ({ postView, navigator }) => {
-
 
       return (
             <View style={styles.container}>
@@ -64,11 +63,66 @@ const ReelsComments = ({ postView, navigator }) => {
 
                   <View style={{ height: 1, borderBottomWidth: 1, opacity: 0.2, width: '100%' }} />
 
-                  <ScrollView style={{ height: '100%' }}>
-                        <View>
-                              {Array.from(Array(20), (_, i) => <ReelsComment key={i} comment={faker.lorem.word(1)} />)}
+                  <ScrollView style={{ height: '100%', width: '100%' }}>
+                        <View style={styles.commentsContainer}>
+                              {Array.from(Array(20), (_, i) => <ReelsComment key={i} likeCount={'5625'} comment={faker.lorem.words(5)} img={faker.internet.avatar()} username={faker.internet.userName()} />)}
                         </View>
                   </ScrollView>
+                  <View style={styles.writeCommentContainer}>
+                        <View style={{ height: 1, borderBottomWidth: 1, opacity: 0.2, width: '100%' }} />
+                        <View style={{ width: '100%', flexDirection: 'row', paddingVertical: 12, paddingHorizontal: 14 }}>
+                              <View style={{ flex: 1 }}>
+                                    <Text style={{ fontSize: 26 }}>
+                                          ❤️
+                                    </Text>
+                              </View>
+                              <View style={{ flex: 1 }}>
+                                    <Text style={{ fontSize: 26 }}>
+                                          🙌
+                                    </Text>
+                              </View>
+                              <View style={{ flex: 1 }}>
+                                    <Text style={{ fontSize: 26 }}>
+                                          🔥
+                                    </Text>
+                              </View>
+                              <View style={{ flex: 1 }}>
+                                    <Text style={{ fontSize: 26 }}>
+                                          👏
+                                    </Text>
+                              </View>
+                              <View style={{ flex: 1 }}>
+                                    <Text style={{ fontSize: 26 }}>
+                                          😰
+                                    </Text>
+                              </View>
+                              <View style={{ flex: 1 }}>
+                                    <Text style={{ fontSize: 26 }}>
+                                          😍
+                                    </Text>
+                              </View>
+                              <View style={{ flex: 1 }}>
+                                    <Text style={{ fontSize: 26 }}>
+                                          😮
+                                    </Text>
+                              </View>
+
+                              <View style={{ flex: 1 }}>
+                                    <Text style={{ fontSize: 26 }}>
+                                          😂
+                                    </Text>
+                              </View>
+
+                        </View>
+                        <View style={{ height: 1, borderBottomWidth: 1, opacity: 0.2, width: '100%' }} />
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+                              <View style={{ paddingHorizontal: 12, paddingVertical: 2 }}>
+                                    <Image style={{ width: 38, height: 38, borderWidth: 1, borderColor: '#BABABA', borderRadius: 100 }} source={require('../../assets/img/ilhan_ers.jpg')} />
+                                    <TextInput style={styles.sendMessage} placeholder="Search" placeholderTextColor="#fff" />
+
+                              </View>
+                        </View>
+                  </View>
             </View>
       )
 }
@@ -77,8 +131,8 @@ const ReelsComments = ({ postView, navigator }) => {
 const styles = StyleSheet.create({
       container: {
             backgroundColor: '#fff',
-            height: 40,
-            flex: 3 / 4
+            height: 120,
+            flex: 3 / 4,
       },
       top: {
             height: 50,
@@ -87,9 +141,24 @@ const styles = StyleSheet.create({
       },
       userBanner: {
             height: 80,
-            marginTop: 15,
-            paddingHorizontal: 2
-      }
+            marginTop: 12,
+            paddingHorizontal: 8
+      },
+      commentsContainer: {
+            width: '100%',
+      },
+      writeCommentContainer: {
+            height: 102
+      },
+      sendMessage: {
+            width: '75%',
+            borderWidth: 1,
+            borderColor: '#fff',
+            height: 40,
+            borderRadius: 21,
+            padding: 10,
+            color: '#fff'
+      },
 })
 
 export default ReelsComments;
