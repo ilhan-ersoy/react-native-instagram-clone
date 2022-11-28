@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { TextInput, Image } from "react-native";
-import { Burger, DropDown, MoreAccounts, Plus, Security, SinglePlus } from "../../../Icons";
-import Content from "../Content";
+import { Burger, DropDown, LeftArrow, MoreAccounts, Plus, Security, SinglePlus, Verified, Bell } from "../../../Icons";
+import OtherContent from "../OtherContent";
 import { ScrollView } from "react-native";
 import { useState } from "react";
 import MoreAccount from './MoreAccount';
@@ -18,17 +18,25 @@ function OtherProfileScreen({ navigation }) {
                 <View style={styles.container}>
                     <View style={styles.header}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Security size={24} />
-                            <Text style={{ fontWeight: 'bold', fontSize: 20, marginLeft: 10 }}>
-                                zuck
-                            </Text>
-                            <TouchableOpacity style={{ marginLeft: 5 }}>
-                                <DropDown size={16} />
+                            <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.goBack()}>
+                                <View>
+                                    <LeftArrow color={'#000'} size={24} />
+                                </View>
                             </TouchableOpacity>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 12 }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={{ fontWeight: 'bold', fontSize: 20, marginLeft: 10 }}>
+                                        zuck
+                                    </Text>
+                                    <View style={{ marginLeft: 3 }}>
+                                        <Verified size={13} />
+                                    </View>
+                                </View>
+                            </View>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <TouchableOpacity style={{ marginRight: 20 }}>
-                                <Plus size={30} />
+                                <Bell size={24} />
                             </TouchableOpacity>
 
                             <TouchableOpacity>
@@ -40,7 +48,7 @@ function OtherProfileScreen({ navigation }) {
 
                     <View style={styles.user}>
                         <View>
-                            <Image style={{ width: 80, height: 80, borderWidth: 1, borderColor: '#BABABA', borderRadius: 100 }} source={{ uri: 'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/177219615_1728341124004802_3178671336629535217_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=1&_nc_ohc=3Sn2gXkCo9UAX-rfQmE&edm=AHG7ALcBAAAA&ccb=7-5&oh=00_AT_K5kXLRmelTIojdqYUUIaKz6DD066d0sQ9OIH6SeYlYQ&oe=62EB5C47&_nc_sid=5cbaad' }} />
+                            <Image style={{ width: 80, height: 80, borderWidth: 1, borderColor: '#BABABA', borderRadius: 100 }} source={{ uri: 'https://a9p9n2x2.stackpathcdn.com/wp-content/blogs.dir/1/files/2020/05/Mark-Zuckerberg-e1590173646243-960x722.jpg' }} />
                         </View>
                         <View style={{ flexDirection: 'row', marginLeft: 40, alignItems: 'center' }}>
                             <View style={{ alignItems: 'center' }}>
@@ -58,7 +66,7 @@ function OtherProfileScreen({ navigation }) {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ marginTop: 3, fontWeight: '400' }}>Mark Zuckerberg</Text>
+                        <Text style={{ marginTop: 3, fontWeight: '600' }}>Mark Zuckerberg</Text>
                     </View>
                     <View style={styles.followerInfo}>
                         <View style={{ position: 'relative' }}>
@@ -110,7 +118,7 @@ function OtherProfileScreen({ navigation }) {
                 </View>
 
                 <View style={{ height: 2000 }}>
-                    <Content />
+                    <OtherContent />
                 </View>
 
             </View>

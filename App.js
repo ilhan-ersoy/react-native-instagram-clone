@@ -1,31 +1,23 @@
-import { StyleSheet, Text, View, useEffect } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AppScreens from './AppScreens';
 import LoginScreen from './screens/Login/LoginScreen';
+import Settings from './screens/settings/Settings';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState } from "react";
 import CommentsScreen from './screens/comments/Comments';
 import OtherProfileScreen from './screens/profile/Other/Other';
 import store from "./redux/store"
 import { Provider } from "react-redux";
-import { useDispatch, useSelector } from "react-redux";
-import { setShow, show } from "./redux/appSlice";
-import ExploreScreen from './screens/explore/explore';
 import MessageScreen from './screens/message/message';
-import Home from './Home';
-import { setHideTabBar, hideTabBar } from './redux/appSlice';
+import EditProfileScreen from './screens/edit-profile/EditProfile';
 
 export default function App() {
-
-
   const [report, setReport] = useState(false);
 
   const Stack = createNativeStackNavigator();
- 
-
 
   return (
-    //<SafeAreaView style={{flex:1}}>
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
@@ -48,11 +40,18 @@ export default function App() {
             name="Message"
             component={MessageScreen} />
 
-          {/*<Stack.Screen
+          <Stack.Screen
+            name="EditProfile"
+            component={EditProfileScreen} />
+
+          <Stack.Screen
             name="Login"
             component={LoginScreen} />
 
-
+          <Stack.Screen
+            name="Settings"
+            component={Settings} />
+          {/*
 
 
           <Stack.Screen
@@ -64,7 +63,6 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
-    //</SafeAreaView>
   );
 }
 

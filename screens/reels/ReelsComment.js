@@ -24,13 +24,13 @@ const ReelsComment = ({ comment, img, username, likeCount }) => {
                         <Image
                               style={{ width: 38, height: 38, borderRadius: 40, borderWidth: 3, borderColor: '#fff' }}
                               source={{
-                                    uri: img
+                                    uri: 'https://freesvg.org/img/abstract-user-flat-4.png'
                               }}
                         />
                         <View style={{ flexDirection: 'column' }}>
                               <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 8 }}>
                                     <Text style={styles.userName}>
-                                          {username}
+                                          {'pyromx11'}
                                     </Text>
                                     <Text style={{ fontSize: 10, opacity: 0.6, fontWeight: '600', marginLeft: 6 }}>
                                           10h
@@ -38,7 +38,7 @@ const ReelsComment = ({ comment, img, username, likeCount }) => {
                               </View>
                               <View style={{ marginLeft: 8, marginTop: 10 }}>
                                     <Text>
-                                          {comment}
+                                          {'Lorem lipsum dolar mint it.'}
                                     </Text>
                               </View>
                               <View style={{ marginLeft: 8, marginTop: 10, flexDirection: 'row' }}>

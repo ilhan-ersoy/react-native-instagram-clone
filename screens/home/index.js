@@ -85,11 +85,14 @@ const HomeScreen = ({ navigation }) => {
                     <Header />
                     <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} style={{ height: '100%' }}>
                         <InstaStory data={testData}
+                            unPressedBorderColor={'none'}
+                            pressedBorderColor={'none'}
                             duration={10}
                             onStart={item => console.log(item)}
                             onClose={item => console.log('close: ', item)}
                             customSwipeUpComponent={<BottomComponent />}
-                        />
+                        >
+                        </InstaStory>
                         {posts.map((post) => <Post bottomSheet={bottomSheet} navigation={navigation} setShowComments={setShowComments} post={post} />)}
                     </ScrollView>
                 </View>

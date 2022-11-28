@@ -37,8 +37,9 @@ const SearchScreen = ({ navigation }) => {
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "65%", alignItems: "center" }}>
               <View style={{ width: "100%", flexDirection: "row" }}>
-                {new Array(2).fill(
+                {Array.from(Array(3), (_, i) =>
                   <TouchableWithoutFeedback
+                    key={i}
                     onPress={() =>
                       navigation.navigate("Explore", {
                         img: faker.image.fashion(500, 400, true),
@@ -55,15 +56,16 @@ const SearchScreen = ({ navigation }) => {
                         uri: faker.image.people(),
                       }}
                     />
-                  </TouchableWithoutFeedback>
-                )}
+                  </TouchableWithoutFeedback>)
+                }
                 <View style={{ position: "absolute", right: 7, top: 3 }}>
                   <Carosel size={24} />
                 </View>
               </View>
               <View style={{ width: "100%", flexDirection: "row" }}>
-                {new Array(2).fill(
+                {Array.from(Array(2), (_, i) =>
                   <Image
+                    key={i}
                     style={[
                       styles.exploreImg,
                       { borderWidth: 2, borderColor: "#fff" },
@@ -71,8 +73,8 @@ const SearchScreen = ({ navigation }) => {
                     source={{
                       uri: faker.image.city(),
                     }}
-                  />
-                )}
+                  />)
+                }
                 <View style={{ position: "absolute", right: 7, top: 3 }}>
                   <Carosel size={24} />
                 </View>
@@ -96,8 +98,10 @@ const SearchScreen = ({ navigation }) => {
           <View>
             <View style={{ width: "65%", alignItems: "center" }}>
               <View style={{ width: "100%", flexDirection: "row" }}>
-                {new Array(3).fill(
+
+                {Array.from(Array(3), (_, i) =>
                   <Image
+                    key={i}
                     style={[
                       styles.exploreImg,
                       { borderWidth: 2, borderColor: "#fff" },
@@ -105,15 +109,17 @@ const SearchScreen = ({ navigation }) => {
                     source={{
                       uri: faker.image.animals(),
                     }}
-                  />
-                )}
+                  />)
+                }
+
                 <View style={{ position: "absolute", right: 7, top: 3 }}>
                   <Carosel size={24} />
                 </View>
               </View>
               <View style={{ width: "100%", flexDirection: "row" }}>
-                {new Array(3).fill(
+                {Array.from(Array(3), (_, i) =>
                   <Image
+                    key={i}
                     style={[
                       styles.exploreImg,
                       { borderWidth: 2, borderColor: "#fff" },
@@ -121,38 +127,40 @@ const SearchScreen = ({ navigation }) => {
                     source={{
                       uri: faker.image.business(),
                     }}
-                  />
-                )}
+                  />)
+                }
               </View>
             </View>
           </View>
           <View>
             <View style={{ width: "65%", alignItems: "center" }}>
               <View style={{ width: "100%", flexDirection: "row" }}>
-                {new Array(3).fill(
+                {Array.from(Array(3), (_, i) =>
                   <Image
+                    key={i}
                     style={[
                       styles.exploreImg,
                       { borderWidth: 2, borderColor: "#fff" },
                     ]}
                     source={{
-                      uri: faker.image.animals(),
+                      uri: faker.image.business(),
                     }}
-                  />
-                )}
+                  />)
+                }
               </View>
               <View style={{ width: "100%", flexDirection: "row" }}>
-                {new Array(3).fill(
+                {Array.from(Array(3), (_, i) =>
                   <Image
+                    key={i}
                     style={[
                       styles.exploreImg,
                       { borderWidth: 2, borderColor: "#fff" },
                     ]}
                     source={{
-                      uri: faker.image.food(),
+                      uri: faker.image.business(),
                     }}
-                  />
-                )}
+                  />)
+                }
                 <View style={{ position: "absolute", right: 10, top: 10 }}>
                   <ReelsFillWhite size={24} />
                 </View>

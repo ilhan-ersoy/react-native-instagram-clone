@@ -2,23 +2,111 @@ import { View } from "react-native"
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { StyleSheet, ScrollView, TextInput, Text, RefreshControl, TouchableOpacity } from 'react-native';
 import { SafeAreaView, Image } from "react-native";
-import { LeftArrow, DropDown, Plus, SinglePlus, DmSearch, Call, VideoCall, ReelsFilled, ReelsFillWhite, Microphone, Images, Sticker, Camera } from "../../Icons";
+import { LeftArrow, DropDown, Plus, SinglePlus, DmSearch, Call, VideoCall, ReelsFilled, ReelsFillWhite, Microphone, Images, Sticker, Camera, Search } from "../../Icons";
 import { faker } from "@faker-js/faker";
-
+import BottomSheet from "react-native-gesture-bottom-sheet";
+import { StickerComponent } from "./StickerComponent";
 
 const MessageScreen = ({ route, navigation }) => {
 
-    console.log('====================================');
-    console.log(navigation);
-    console.log('====================================');
+    const bottomSheet = useRef();
+    const [message, setMessage] = useState();
+    const [messages, setMessages] = useState(['Node']);
+
+    const addMessage = (e) => {
+        setMessages(prevMessage => [...prevMessage, message])
+    }
+    const gifContainer = useRef();
+
 
     return (
         <SafeAreaView style={styles.container}>
+            <BottomSheet hasDraggableIcon ref={bottomSheet} height={'700'}>
+                <View style={{ flex: 1, paddingHorizontal: 10, marginTop: 10 }}>
+                    <View style={{ position: 'absolute', left: 20, top: 6 }}>
+                        <View style={{ opacity: 0.4 }}>
+                            <Search size={18} />
+                        </View>
+                    </View>
+                    <TextInput style={{ width: '100%', borderWidth: 1, borderColor: '#dbdbdb', height: 31, borderRadius: 5, padding: 6, fontWeight: '500' }} placeholderTextColor="#aeadad" placeholder="        Search GIPHY stickers" />
+                    <View ref={gifContainer}>
+                        <ScrollView style={{ height: '100%' }} showsVerticalScrollIndicator={true}>
+                            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
+                                <Image
+                                    source={{ uri: 'https://ohiofi.com/assets/nyan.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                                <Image
+                                    source={{ uri: 'https://ohiofi.com/assets/mario.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                                <Image
+                                    source={{ uri: 'https://i.gifer.com/embedded/download/7H52.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                            </View>
+                            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginTop: 2 }}>
+                                <Image
+                                    source={{ uri: 'https://media.tenor.com/ummvdDD9OdcAAAAM/bunny-happy-dance.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                                <Image
+                                    source={{ uri: 'https://i.gifer.com/embedded/download/7H52.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                                <Image
+                                    source={{ uri: 'https://ohiofi.com/assets/mario.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                            </View>
+                            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginTop: 2 }}>
+                                <Image
+                                    source={{ uri: 'https://media.tenor.com/ummvdDD9OdcAAAAM/bunny-happy-dance.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                                <Image
+                                    source={{ uri: 'https://i.gifer.com/embedded/download/7H52.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                                <Image
+                                    source={{ uri: 'https://ohiofi.com/assets/mario.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                            </View>
+                            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
+                                <Image
+                                    source={{ uri: 'https://ohiofi.com/assets/nyan.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                                <Image
+                                    source={{ uri: 'https://ohiofi.com/assets/mario.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                                <Image
+                                    source={{ uri: 'https://i.gifer.com/embedded/download/7H52.gif' }}
+                                    style={{ width: 120, height: 120 }}
+                                />
+                            </View>
+                            <View style={{ width: '100%', height: 100, flexDirection: 'column', justifyContent: 'center', }}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 75 }}>
+                                    <TouchableOpacity activeOpacity={0.7}>
+                                        <Sticker size={36} />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity activeOpacity={0.7}>
+                                        <Sticker size={36} />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </ScrollView>
+                    </View>
+                </View>
+            </BottomSheet>
+
             <View style={styles.header}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                            <LeftArrow size={24} />
+                            <LeftArrow size={24} color={'#000'} />
                         </TouchableOpacity>
                     </View>
 
@@ -80,14 +168,14 @@ const MessageScreen = ({ route, navigation }) => {
                                     style={{ width: 42, height: 42, borderRadius: 100 }}
                                     source={{ uri: faker.image.avatar(200, 400, true) }} />
 
-                                <Text style={{ marginLeft: 6 }}>aogofficial</Text>
+                                <Text style={{ marginLeft: 6 }}>instapage</Text>
                             </View>
 
                             <Image style={{ height: 250 }} source={{ uri: faker.image.abstract() }} />
 
                             <View style={[styles.bottom]}>
                                 <Text style={{ fontWeight: '500' }}>
-                                    aogofficial
+                                    insta page
                                 </Text>
                                 <Text style={{ fontSize: 12, marginLeft: 10 }}>
                                     Şifa Deposu.
@@ -109,8 +197,6 @@ const MessageScreen = ({ route, navigation }) => {
                         </View>
                     </View>
 
-
-
                     <View style={{ alignSelf: 'flex-end', marginVertical: 10 }}>
                         <View style={styles.post}>
                             <View style={styles.postHeader}>
@@ -118,14 +204,14 @@ const MessageScreen = ({ route, navigation }) => {
                                     style={{ width: 42, height: 42, borderRadius: 100 }}
                                     source={{ uri: faker.image.avatar(200, 400, true) }} />
 
-                                <Text style={{ marginLeft: 6 }}>aogofficial</Text>
+                                <Text style={{ marginLeft: 6 }}>instapage</Text>
                             </View>
 
                             <Image style={{ height: 250 }} source={{ uri: faker.image.abstract() }} />
 
                             <View style={[styles.bottom]}>
                                 <Text style={{ fontWeight: '500' }}>
-                                    aogofficial
+                                    instapage
                                 </Text>
                                 <Text style={{ fontSize: 12, marginLeft: 10 }}>
                                     Şifa Deposu.
@@ -173,9 +259,11 @@ const MessageScreen = ({ route, navigation }) => {
                     </View>
 
                     <View style={{ alignSelf: 'flex-end' }}>
-                        <View style={{ backgroundColor: '#3c4ad4', padding: 13, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontWeight: '600', color: '#fff' }}>funny !</Text>
-                        </View>
+                        {messages.map((message) => (
+                            <View style={{ backgroundColor: '#3c4ad4', padding: 13, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
+                                <Text style={{ fontWeight: '500', color: '#fff' }}>{message}</Text>
+                            </View>
+                        ))}
                     </View>
                 </View>
             </ScrollView>
@@ -190,25 +278,36 @@ const MessageScreen = ({ route, navigation }) => {
                                     <Camera size={24} />
                                 </TouchableOpacity>
                             </View>
-                            <TextInput style={{ height: 50, width: 300, marginLeft: 10 }} placeholder="Message" placeholderTextColor="#000" />
+                            <TextInput onChangeText={(e) => setMessage(e)} value={message} style={{ height: 50, width: 300, marginLeft: 10 }} placeholder="Message" placeholderTextColor="#000" />
                         </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <TouchableOpacity>
-                                <Microphone size={24} />
+                        {message
+                            ?
+                            <TouchableOpacity opacity={0.6} onPress={() => addMessage()}>
+                                <View>
+                                    <Text style={{ fontWeight: '600', color: "#0095f6Se" }}>
+                                        Send
+                                    </Text>
+                                </View>
                             </TouchableOpacity>
+                            :
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <TouchableOpacity>
+                                    <Microphone size={24} />
+                                </TouchableOpacity>
 
-                            <TouchableOpacity style={{ marginLeft: 10 }}>
-                                <Images size={24} />
-                            </TouchableOpacity>
+                                <TouchableOpacity style={{ marginLeft: 10 }}>
+                                    <Images size={24} />
+                                </TouchableOpacity>
 
-                            <TouchableOpacity style={{ marginLeft: 10 }}>
-                                <Sticker size={24} />
-                            </TouchableOpacity>
-                        </View>
+                                <TouchableOpacity onPress={() => bottomSheet.current.show()} style={{ marginLeft: 10 }}>
+                                    <Sticker size={24} />
+                                </TouchableOpacity>
+                            </View>
+                        }
+
                     </View>
                 </View>
             </View>
-
         </SafeAreaView>
     );
 }
@@ -286,6 +385,9 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         justifyContent: 'center',
         paddingHorizontal: 20
+    },
+    gifsContainer: {
+
     }
 });
 

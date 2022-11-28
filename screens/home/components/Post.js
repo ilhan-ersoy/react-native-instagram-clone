@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { TextInput, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import BottomSheet from "react-native-gesture-bottom-sheet";
-import { Hearth, More, Comment, Message, BookMark, Verified, HearthLike, Mute, UnMute } from "../../../Icons";
+import { Hearth, More, Comment, Message, BookMark, Verified, HearthLike, Mute, UnMute, HeartLikeFilled } from "../../../Icons";
 import Swiper, { scrollTo } from 'react-native-swiper';
 import SendStory from "./InstaStory/SendStory";
 import DoubleClick from "react-native-double-tap";
@@ -14,12 +14,12 @@ import { Video } from "expo-av";
 import posts from "../../../data/Posts";
 
 const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
-
     const [currentIndex, setCurrentIndex] = useState(0);
     const dispatch = useDispatch();
     const postBottomSheet = useRef();
     const [mute, setMute] = useState(false);
     const [showMute, setShowMute] = useState(false);
+    const [like, setLike] = useState(false);
 
     React.useEffect(() => {
         setShowMute(true)
@@ -65,7 +65,7 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                     </View>}
                 </View>
                 <TouchableOpacity style={{ height: 40, width: 40, alignItems: 'center', justifyContent: 'center' }} onPress={() => bottomSheet.current.show()}>
-                    <More width={22} />
+                    <More color="#000" width={22} height={20} />
                 </TouchableOpacity>
             </View>
 
@@ -73,7 +73,7 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                 <HearthLike size={64} />
             </View>
 
-            <Swiper onIndexChanged={(e) => setCurrentIndex(e)} loop={false} showsPagination={false} style={{ height: 350 }}>
+            <Swiper onIndexChanged={(e) => setCurrentIndex(e)} loop={false} showsPagination={false} style={{ height: 350, zIndex: 999, }}>
                 {post.imgs.map((img) => (
                     <View>
                         <Image
@@ -85,48 +85,34 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                     </View>
                 ))}
                 <View>
-                    <View>
-                        <TouchableOpacity activeOpacity={1} onPress={() => setMute(!mute)}>
-                            <Video
-                                ref={video}
-                                source={require(`../../../assets/video/reels3.mp4`)}
-                                rate={1.0}
-                                volume={1.0}
-                                isMuted={mute}
-                                resizeMode={"cover"}
-                                shouldPlay
-                                isLooping
-                                style={{ height: "100%" }}
-                            ></Video>
-                            {showMute && <View style={{ position: 'absolute', top: '50%', left: '45%', width: 50, height: 50, backgroundColor: '#262626', borderRadius: 30, justifyContent: 'center', alignItems: 'center' }}>
-                                {mute ? <Mute size={22} /> : <UnMute size={22} />}
-                            </View>}
-                        </TouchableOpacity>
-                    </View>
+                    <Video
+                        ref={video}
+                        source={require("../../../assets/video/reels2.mp4")}
+                        rate={1.0}
+                        volume={1.0}
+                        isMuted={true}
+                        resizeMode={"cover"}
+                        shouldPlay={currentIndex === 2 ? true : false}
+                        isLooping
+                        style={{ height: '100%' }}
+                    ></Video>
                 </View>
-            </Swiper>
 
-            {/*<Swiper style={styles.wrapper} showsButtons={true}>
-                <View style={styles.slide1}>
-                    <Text style={styles.text}>Hello Swiper</Text>
-                </View>
-                <View style={styles.slide2}>
-                    <Text style={styles.text}>Beautiful</Text>
-                </View>
-                <View style={styles.slide3}>
-                    <Text style={styles.text}>And simple</Text>
-                </View>
-            </Swiper>*/}
-
-
-
+            </Swiper >
 
             <View style={styles.postInfo}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <View>
-                        <Hearth size={24} />
-                    </View>
-
+                    <TouchableOpacity activeOpacity={0.5} onPress={() => setLike(!like)}>
+                        {like ?
+                            <View>
+                                <Hearth size={24} />
+                            </View>
+                            :
+                            <View>
+                                <HeartLikeFilled size={24} />
+                            </View>
+                        }
+                    </TouchableOpacity>
                     <View style={{ marginLeft: 12 }}>
                         <TouchableOpacity onPress={() => navigation.navigate('Comments')}>
                             <Comment size={24} />
@@ -162,7 +148,6 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                 <View style={{ flexDirection: 'row', marginRight: 50 }}>
                     <TouchableOpacity opacity={1} style={{ width: 8, height: 8, backgroundColor: `${currentIndex == 0 ? '#32B5FF' : '#C4C4C4'}`, borderRadius: 21 }}></TouchableOpacity>
                     <TouchableOpacity opacity={1} style={{ width: 8, height: 8, backgroundColor: `${currentIndex == 1 ? '#32B5FF' : '#C4C4C4'}`, borderRadius: 21, marginLeft: 6 }}></TouchableOpacity>
-                    <TouchableOpacity opacity={1} style={{ width: 8, height: 8, backgroundColor: `${currentIndex == 2 ? '#32B5FF' : '#C4C4C4'}`, borderRadius: 21, marginLeft: 6 }}></TouchableOpacity>
                 </View>
                 <View>
                     <BookMark size={24} />
@@ -175,12 +160,10 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                     <View style={{ flexDirection: 'row', fontSize: 13, alignItems: 'center' }}>
                         <Image
                             style={{ width: 25, height: 25, borderRadius: 21, borderWidth: 1, borderColor: '#CACACA' }}
-                            source={{
-                                uri: post.user.avatarImg,
-                            }}
+                            source={require('../../../assets/img/ilhan_ers.jpg')}
                         />
                         <Text style={{ marginLeft: 8, fontSize: 13 }}>
-                            Liked by <Text style={{ fontWeight: 'bold' }}>ilhan_ers</Text> and <Text style={{ fontWeight: 'bold' }}>105 others</Text>
+                            Liked by <Text style={{ fontWeight: 'bold' }}>ilhan_ers</Text> and <Text style={{ fontWeight: 'bold' }}>{post.likes} others</Text>
                         </Text>
                     </View>}
             </View>
@@ -200,11 +183,9 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                 <View style={{ flexDirection: 'row' }}>
                     <Image
                         style={styles.commentAvatar}
-                        source={{
-                            uri: post.user.avatarImg,
-                        }}
+                        source={require('../../../assets/img/ilhan_ers.jpg')}
                     />
-                    <TextInput style={[styles.emailInput, { justifyContent: 'flex-start', marginLeft: 10 }]} placeholder="Add comment..." />
+                    <TextInput style={[styles.emailInput, { justifyContent: 'flex-start', marginLeft: 10, fontSize: 13 }]} placeholder="Add comment..." />
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -219,10 +200,10 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
 
 
             <BottomSheet hasDraggableIcon ref={postBottomSheet} height={'400'}>
-                <SendStory img={post.postImg} />
+                <SendStory img={post.imgs[0]} />
             </BottomSheet>
 
-        </View>
+        </View >
         //</ScrollView>
     )
 

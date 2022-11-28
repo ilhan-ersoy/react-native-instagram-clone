@@ -3,7 +3,7 @@ import { Video } from "expo-av";
 import { View, StyleSheet, Text, Touchable } from "react-native";
 import ReelsVideoBanner from "./ReelsVideoBanner";
 import { useRef, useState, useEffect } from "react";
-import { TouchableOpacity, Image, ScrollView, TextInput } from "react-native";
+import { TouchableOpacity, TouchableWithoutFeedback, Image, ScrollView, TextInput } from "react-native";
 import { LeftArrow, Message, MessageReels, Messenger, Mute } from "../../Icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BottomSheet from "react-native-gesture-bottom-sheet";
@@ -12,7 +12,11 @@ import { Faker, faker } from "@faker-js/faker";
 import SendStory from "../home/components/InstaStory/SendStory";
 import { LinearGradient } from "expo-linear-gradient";
 
+
 const ReelsComments = ({ postView, navigator }) => {
+      const [emojiMore, setEmojiMore] = useState(false);
+
+      const [comment, setComment] = useState('');
 
       return (
             <View style={styles.container}>
@@ -31,14 +35,14 @@ const ReelsComments = ({ postView, navigator }) => {
                   </View>
                   <View style={styles.userBanner}>
                         <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
-
                               <LinearGradient
                                     style={{ width: 50, height: 50, borderRadius: 100, justifyContent: 'center', alignItems: 'center' }}
                                     colors={['#DE0046', '#F7A34B']}>
                                     <Image
                                           style={{ width: 45, height: 45, borderRadius: 40, borderWidth: 3, borderColor: '#fff' }}
                                           source={{
-                                                uri: faker.image.avatar(),
+                                                //faker.userImage()
+                                                uri: 'https://freesvg.org/img/abstract-user-flat-4.png',
                                           }}
                                     />
                               </LinearGradient>
@@ -71,55 +75,98 @@ const ReelsComments = ({ postView, navigator }) => {
                   <View style={styles.writeCommentContainer}>
                         <View style={{ height: 1, borderBottomWidth: 1, opacity: 0.2, width: '100%' }} />
                         <View style={{ width: '100%', flexDirection: 'row', paddingVertical: 12, paddingHorizontal: 14 }}>
-                              <View style={{ flex: 1 }}>
-                                    <Text style={{ fontSize: 26 }}>
-                                          ❤️
-                                    </Text>
-                              </View>
-                              <View style={{ flex: 1 }}>
-                                    <Text style={{ fontSize: 26 }}>
-                                          🙌
-                                    </Text>
-                              </View>
-                              <View style={{ flex: 1 }}>
-                                    <Text style={{ fontSize: 26 }}>
-                                          🔥
-                                    </Text>
-                              </View>
-                              <View style={{ flex: 1 }}>
-                                    <Text style={{ fontSize: 26 }}>
-                                          👏
-                                    </Text>
-                              </View>
-                              <View style={{ flex: 1 }}>
-                                    <Text style={{ fontSize: 26 }}>
-                                          😰
-                                    </Text>
-                              </View>
-                              <View style={{ flex: 1 }}>
-                                    <Text style={{ fontSize: 26 }}>
-                                          😍
-                                    </Text>
-                              </View>
-                              <View style={{ flex: 1 }}>
-                                    <Text style={{ fontSize: 26 }}>
-                                          😮
-                                    </Text>
-                              </View>
+                              <TouchableWithoutFeedback onPress={() => setComment(comment + '❤️')} style={{ flex: 1 }}>
+                                    <View style={{ flex: 1 }}>
+                                          <Text style={{ fontSize: 26 }}>
+                                                ❤️
+                                          </Text>
+                                    </View>
+                              </TouchableWithoutFeedback>
 
-                              <View style={{ flex: 1 }}>
-                                    <Text style={{ fontSize: 26 }}>
-                                          😂
-                                    </Text>
+                              <View style={{ flex: 1, position: 'relative' }}>
+                                    {emojiMore &&
+                                          <View style={styles.emojiMore}>
+                                                <View style={{ flexDirection: 'row' }}>
+                                                      <Text style={{ fontSize: 21, marginLeft: 8 }}>
+                                                            👏
+                                                      </Text>
+                                                      <Text style={{ fontSize: 21, marginLeft: 8 }}>
+                                                            👏
+                                                      </Text>
+                                                      <Text style={{ fontSize: 21, marginLeft: 8 }}>
+                                                            👏
+                                                      </Text>
+                                                      <Text style={{ fontSize: 21, marginLeft: 8 }}>
+                                                            👏
+                                                      </Text>
+                                                </View>
+                                          </View>
+                                    }
+                                    <TouchableWithoutFeedback onPressOut={() => setEmojiMore(false)} onLongPress={() => setEmojiMore(true)} onPress={() => setComment('🙌')} style={{ flex: 1 }}>
+                                          <Text style={{ fontSize: 26 }}>
+                                                🙌
+                                          </Text>
+                                    </TouchableWithoutFeedback>
                               </View>
+                              <TouchableWithoutFeedback onPress={() => setComment('🔥')} style={{ flex: 1 }}>
+                                    <View style={{ flex: 1 }}>
+                                          <Text style={{ fontSize: 26 }}>
+                                                🔥
+                                          </Text>
+                                    </View>
+                              </TouchableWithoutFeedback>
 
+                              <TouchableWithoutFeedback onPress={() => setComment('👏')} style={{ flex: 1 }}>
+                                    <View style={{ flex: 1 }}>
+                                          <Text style={{ fontSize: 26 }}>
+                                                👏
+                                          </Text>
+                                    </View>
+                              </TouchableWithoutFeedback>
+
+
+                              <TouchableWithoutFeedback onPress={() => setComment('😰')} style={{ flex: 1 }}>
+                                    <View style={{ flex: 1 }}>
+                                          <Text style={{ fontSize: 26 }}>
+                                                😰
+                                          </Text>
+                                    </View>
+                              </TouchableWithoutFeedback>
+
+                              <TouchableWithoutFeedback onPress={() => setComment('😍')} style={{ flex: 1 }}>
+                                    <View style={{ flex: 1 }}>
+                                          <Text style={{ fontSize: 26 }}>
+                                                😍
+                                          </Text>
+                                    </View>
+                              </TouchableWithoutFeedback>
+
+                              <TouchableWithoutFeedback onPress={() => setComment('😮')} style={{ flex: 1 }}>
+                                    <View style={{ flex: 1 }}>
+                                          <Text style={{ fontSize: 26 }}>
+                                                😮
+                                          </Text>
+                                    </View>
+                              </TouchableWithoutFeedback>
+
+                              <TouchableWithoutFeedback onPress={() => setComment('😂')} style={{ flex: 1 }}>
+                                    <View style={{ flex: 1 }}>
+                                          <Text style={{ fontSize: 26 }}>
+                                                😂
+                                          </Text>
+                                    </View>
+                              </TouchableWithoutFeedback>
                         </View>
                         <View style={{ height: 1, borderBottomWidth: 1, opacity: 0.2, width: '100%' }} />
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                              <View style={{ paddingHorizontal: 12, paddingVertical: 2 }}>
-                                    <Image style={{ width: 38, height: 38, borderWidth: 1, borderColor: '#BABABA', borderRadius: 100 }} source={require('../../assets/img/ilhan_ers.jpg')} />
-                                    <TextInput style={styles.sendMessage} placeholder="Search" placeholderTextColor="#fff" />
-
+                              <View style={styles.writeCommentComponent}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                          <Image style={{ width: 38, height: 38, borderWidth: 1, borderColor: '#BABABA', borderRadius: 100 }} source={require('../../assets/img/ilhan_ers.jpg')} />
+                                          <TextInput onChange={(e) => setComment(e.target.value)} value={comment} style={[styles.emailInput, { justifyContent: 'flex-start', marginLeft: 10, fontSize: 14 }]} placeholder="Add comment." />
+                                    </View>
+                                    <View>
+                                          <Text>Send</Text>
+                                    </View>
                               </View>
                         </View>
                   </View>
@@ -159,6 +206,31 @@ const styles = StyleSheet.create({
             padding: 10,
             color: '#fff'
       },
+      writeCommentComponent: {
+            width: '100%',
+            flexDirection: 'row',
+            paddingHorizontal: 16,
+            paddingVertical: 2,
+            alignItems: 'center',
+            justifyContent: 'space-between'
+      },
+      emojiMore: {
+            position: 'absolute',
+            bottom: 40,
+            backgroundColor: '#f3f3f3',
+            padding: 10,
+            width: 160,
+            borderRadius: 9
+      },
+      writeComment: {
+            width: '75%',
+            borderWidth: 1,
+            borderColor: '#fff',
+            height: 40,
+            borderRadius: 21,
+            padding: 10,
+            color: '#000'
+      }
 })
 
 export default ReelsComments;

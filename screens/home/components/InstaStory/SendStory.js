@@ -12,12 +12,12 @@ const SendStory = ({img}) => {
             <View style={styles.topBar}>
                 {img ? <View style={{width:'100%',flexDirection:'row',alignItems:'center'}}>
                         <Image
-                            style={{width:42,height:42,borderRadius:8}}
+                            style={{width:55,height:55,borderRadius:8}}
                             source={{
                                 uri:img
                             }}
                         />
-                        <TextInput style={[styles.sendMessage,{marginLeft:3}]} placeholder="Write a message..." placeholderTextColor="black" />
+                        <TextInput style={[styles.sendMessage,{marginLeft:6}]} placeholder="Write a message..." placeholderTextColor="black" />
 
                 </View> :
                 <View style={{width:'100%'}}>

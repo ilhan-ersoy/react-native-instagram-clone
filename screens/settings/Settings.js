@@ -8,7 +8,7 @@ import React from "react";
 import { Dimensions, ImageBackground } from 'react-native';
 
 
-function ShopScreen() {
+function Settings() {
 
 
     return (
@@ -109,4 +109,4 @@ const styles = StyleSheet.create({
         borderColor: '#fff'
     }
 });
-export default ShopScreen;
+export default Settings;    

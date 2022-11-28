@@ -51,20 +51,20 @@ const ReelsVideoBanner = ({ mute, setShowComments, showComments }) => {
                             <Image style={{ width: 32, height: 32, borderRadius: 100 }} source={{
                                 uri: faker.image.sports(200, 400, true)
                             }} />
-                            <Text style={{ marginLeft: 9, color: '#fff', fontSize: 12, fontWeight: '700' }}>pyromx11</Text>
+                            <Text style={{ marginLeft: 9, color: '#fff', fontSize: 14, fontWeight: '700' }}>pyromx11</Text>
                             <TouchableOpacity onPress={() => setFollow(!follow)} style={styles.followButton}>
-                                <Text style={{ fontSize: 12, fontWeight: '500', color: '#fff' }}>
+                                <Text style={{ fontSize: 14, fontWeight: '500', color: '#fff' }}>
                                     {follow ? 'Following' : 'Follow'}
                                 </Text>
                             </TouchableOpacity>
                         </View>
                         <View style={{ marginTop: 4 }}>
-                            <Text style={{ color: '#fff', marginTop: 12, fontSize: 12 }}>
+                            <Text style={{ color: '#fff', marginTop: 12, fontSize: 14 }}>
                                 Oasyi Patra...
                             </Text>
                         </View>
                         <View style={{ marginTop: 12 }}>
-                            <Text style={{ color: '#fff', fontSize: 12, }}>
+                            <Text style={{ color: '#fff', fontSize: 14, }}>
                                 fbatilla • Original Audio
                             </Text>
                         </View>
@@ -79,23 +79,23 @@ const ReelsVideoBanner = ({ mute, setShowComments, showComments }) => {
                         </TouchableOpacity>
                         <View style={{ flex: 1.8 / 4, flexDirection: 'column', alignItems: 'center' }}>
                             <TouchableOpacity onPress={() => setLike(!like)} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center' }}>
-                                {like ? <HeartLikeFilled size={24} /> :
-                                    <HearthLike size={24} />}
-                                <Text style={{ fontSize: 12, color: '#fff', fontWeight: '600', marginTop: 2 }}>
+                                {like ? <HeartLikeFilled size={32} /> :
+                                    <HearthLike size={32} />}
+                                <Text style={{ fontSize: 14, color: '#fff', fontWeight: '600', marginTop: 2 }}>
                                     23.1k
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => setShowComments(true)} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center', marginTop: 16 }}>
-                                <CommentReels size={24} />
-                                <Text style={{ fontSize: 12, color: '#fff', fontWeight: '600', marginTop: 2 }}>
+                                <CommentReels size={28} />
+                                <Text style={{ fontSize: 14, color: '#fff', fontWeight: '600', marginTop: 2 }}>
                                     1k
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => alert('left')} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center', marginTop: 16 }}>
-                                <MessageReels size={24} />
+                                <MessageReels size={32} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => alert('left')} style={{ zIndex: 99, flex: 1 / 4, flexDirection: 'column', alignItems: 'center', marginTop: 16 }}>
-                                <More size={28} color='#fff' />
+                                <More width={20} height={10} color='#fff' />
                             </TouchableOpacity>
                             <View style={{ marginTop: 2 }}>
                                 <Image style={{ width: 32, height: 32, borderRadius: 6, borderWidth: 3, borderColor: '#fff' }} source={{

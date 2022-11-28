@@ -10,6 +10,7 @@ import BottomSheet from "react-native-gesture-bottom-sheet";
 import ReelsComments from "./ReelsComments";
 import { setHideTabBar, hideTabBar } from "../../redux/appSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { Platform } from "react-native-web";
 
 
 
@@ -39,14 +40,14 @@ const ReelsVideo = ({ postView, navigator, index }) => {
       >
         <Video
           ref={video}
-          source={require("../../assets/video/reels2.mp4")}
+          source={require("../../assets/video/reels3.mp4")}
           rate={1.0}
           volume={1.0}
           isMuted={mute}
           resizeMode={showComments ? "contain" : "cover"}
           shouldPlay
           isLooping
-          style={{ height: "100%" }}
+          style={{ height: Platform.OS != 'android' ? '121%' : '200%'}}
         ></Video>
 
         <TouchableOpacity
@@ -66,7 +67,6 @@ const ReelsVideo = ({ postView, navigator, index }) => {
               setShowComments={setShowComments}
             />
           )}
-          <View></View>
           {false && (
             <View
               style={{
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "black",
     flexDirection: "column",
+    height: '100%'
   },
 });
 

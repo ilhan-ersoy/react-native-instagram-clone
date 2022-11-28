@@ -7,13 +7,12 @@ import SingleMessage from "./SingleMessage";
 
 const DirectMessage = ({ navigation }) => {
 
-
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <TouchableOpacity opacity={0.6} onPress={() => navigation.navigate('Home')}>
-                        <LeftArrow size={24} />
+                    <TouchableOpacity opacity={0.6} onPress={() => navigation.goBack()}>
+                        <LeftArrow color={'#000'} size={24} />
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column', marginLeft: 15 }}>
                         <Text>
@@ -50,7 +49,6 @@ const DirectMessage = ({ navigation }) => {
 }
 
 export default DirectMessage;
-
 
 const styles = StyleSheet.create({
     container: {

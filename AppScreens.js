@@ -14,11 +14,8 @@ const Tab = createBottomTabNavigator();
 
 function AppScreens() {
 
-
-
     const show = useSelector(state => state.app.show);
     const showTabBar = useSelector(state => state.app.hideTabBar);
-
 
     return (
         <Tab.Navigator
@@ -26,10 +23,8 @@ function AppScreens() {
                 tabBarShowLabel: false,
                 tabBarActiveTintColor: '#000',
                 tabBarInactiveTintColor: '#262626',
-                headerShown: false,
-                tabBarStyle: { display: showTabBar }
+                headerShown: false
             }}
-
         >
             <Tab.Screen
                 name="Home"
