@@ -28,7 +28,7 @@
         <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/android_1.png" width="300" height="600"></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/2.png" width="500" height="600"></td>
+        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/2.png" width="300" height="600"></td>
         <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/3.png" width="300" height="600"></td>
     </tr>
     <tr>
