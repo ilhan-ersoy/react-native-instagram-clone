@@ -22,27 +22,40 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<table>
+<table style="margin: 0 auto;">
     <tr>
-        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/ios_1.png" width="300" height="600"></td>
-        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/android_1.png" width="300" height="600"></td>
-    </tr>
-    <tr>
+        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/1.png" width="300" height="600"></td>
         <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/2.png" width="300" height="600"></td>
+    </tr>
+    <tr>
         <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/3.png" width="300" height="600"></td>
-    </tr>
-    <tr>
         <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/4.png" width="300" height="600"></td>
-        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/5.png" width="300" height="600"></td>
     </tr>
     <tr>
+        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/5.png" width="300" height="600"></td>
         <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/6.png" width="300" height="600"></td>
-        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/7.png" width="300" height="600"></td>
     </tr>
+    <tr>
+        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/7.png" width="300" height="600"></td>
+        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/8.png" width="300" height="600"></td>
+    </tr>
+    <tr>
+        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/9.png" width="300" height="600"></td>
+        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/10.png" width="300" height="600"></td>
+    </tr>
+    <tr>
+        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/11.png" width="300" height="600"></td>
+        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/12.png" width="300" height="600"></td>
+    </tr>
+    <tr>
+        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/13.png" width="300" height="600"></td>
+        <td><img src="https://github.com/ilhan-ersoy/react-native-instagram-clone/blob/master/screenShots/14.png" width="300" height="600"></td>
+    </tr>
+
 </table>
 
 
-### Built With
+### Built Wit
 
 * [TailwindCSS](https://tailwindcss.com/)
 * [JQuery](https://jquery.com)
