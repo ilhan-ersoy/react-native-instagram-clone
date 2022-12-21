@@ -73,7 +73,6 @@ const HomeScreen = ({ navigation }) => {
         }
     )
 
-
     return (
         <>
             <BottomSheet hasDraggableIcon ref={bottomSheet} height={'400'}>
