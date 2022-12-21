@@ -24,7 +24,7 @@
 ## About The Project
 <table>
   <tr>
-    <td><img src="./screenShots/1.png" width="200"></td>
+    <td><img src="./screenShots/1.png" width="400"></td>
     <td><img src="./screenShots/2.png" width="400"></td>
   <tr>
   <tr>
@@ -34,6 +34,22 @@
   <tr>
     <td><img src="./screenShots/5.png" width="400"></td>
     <td><img src="./screenShots/6.png" width="400"></td>
+  <tr> 
+ <tr>
+    <td><img src="./screenShots/7.png" width="400"></td>
+    <td><img src="./screenShots/8.png" width="400"></td>
+  <tr>
+  <tr>
+    <td><img src="./screenShots/9.png" width="400"></td>
+    <td><img src="./screenShots/10.png" width="400"></td>
+  <tr>
+  <tr>
+    <td><img src="./screenShots/11.png" width="400"></td>
+    <td><img src="./screenShots/12.png" width="400"></td>
+  <tr>
+<tr>
+    <td><img src="./screenShots/13.png" width="400"></td>
+    <td><img src="./screenShots/14.png" width="400"></td>
   <tr> 
 </table>
 
