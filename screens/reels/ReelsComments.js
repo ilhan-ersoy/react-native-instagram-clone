@@ -42,7 +42,7 @@ const ReelsComments = ({ postView, navigator }) => {
                                           style={{ width: 45, height: 45, borderRadius: 40, borderWidth: 3, borderColor: '#fff' }}
                                           source={{
                                                 //faker.userImage()
-                                                uri: 'https://freesvg.org/img/abstract-user-flat-4.png',
+                                                uri: faker.internet.avatar(),
                                           }}
                                     />
                               </LinearGradient>
@@ -69,7 +69,7 @@ const ReelsComments = ({ postView, navigator }) => {
 
                   <ScrollView style={{ height: '100%', width: '100%' }}>
                         <View style={styles.commentsContainer}>
-                              {Array.from(Array(20), (_, i) => <ReelsComment key={i} likeCount={'5625'} comment={faker.lorem.words(5)} img={faker.internet.avatar()} username={faker.internet.userName()} />)}
+                              {Array.from(Array(5), (_, i) => <ReelsComment key={i} likeCount={'5625'} comment={faker.lorem.words(5)} img={faker.internet.avatar()} username={faker.internet.userName()} />)}
                         </View>
                   </ScrollView>
                   <View style={styles.writeCommentContainer}>
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
       container: {
             backgroundColor: '#fff',
             height: 120,
-            flex: 3 / 4,
+            flex:1
       },
       top: {
             height: 50,
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
             width: '100%',
       },
       writeCommentContainer: {
-            height: 102
+            height: 72
       },
       sendMessage: {
             width: '75%',

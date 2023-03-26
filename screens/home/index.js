@@ -23,7 +23,7 @@ const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
 }
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, navigate }) => {
 
     const [index, setIndex] = useState(0);
     const [showComments, setShowComments] = useState(false);
@@ -81,7 +81,7 @@ const HomeScreen = ({ navigation }) => {
 
             <Swiper index={index} loop={false} showsPagination={false} style={{ paddingTop: 30, backgroundColor: '#fff' }}>
                 <View>
-                    <Header />
+                    <Header navigation={navigation}/>
                     <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} style={{ height: '100%' }}>
                         <InstaStory data={testData}
                             unPressedBorderColor={'none'}

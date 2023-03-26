@@ -2,7 +2,7 @@ import { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Platform } from 'react-native';
 import { DropDown, Hearth, Logo, Message, Plus, Messenger } from '../../../Icons';
 
-const Header = () => {
+const Header = ({navigation}) => {
 
     const [show, setShow] = useState(false);
 
@@ -22,7 +22,7 @@ const Header = () => {
                 <TouchableOpacity activeOpacity={0.5} style={styles.button}>
                     <Hearth size={28} />
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.5} style={styles.button}>
+                <TouchableOpacity onPress={()=>navigation.navigate('DirectMessage')} activeOpacity={0.5} style={styles.button}>
                     <Messenger size={28} />
                     <View style={styles.messengerNotification}>
                         <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 13 }}>2</Text>

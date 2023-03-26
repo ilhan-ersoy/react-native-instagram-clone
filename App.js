@@ -11,6 +11,7 @@ import store from "./redux/store"
 import { Provider } from "react-redux";
 import MessageScreen from './screens/message/message';
 import EditProfileScreen from './screens/edit-profile/EditProfile';
+import DirectMessage from './screens/home/components/DirectMessage';
 
 export default function App() {
   const [report, setReport] = useState(false);
@@ -23,7 +24,6 @@ export default function App() {
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
         >
-
           <Stack.Screen
             name="Home"
             component={AppScreens} />
@@ -41,11 +41,15 @@ export default function App() {
             component={MessageScreen} />
 
           <Stack.Screen
+            name="DirectMessage"
+            component={DirectMessage} />
+
+          <Stack.Screen
             name="EditProfile"
             component={EditProfileScreen} />
 
           <Stack.Screen
-            name="Login"
+            name="LoginScreen"
             component={LoginScreen} />
 
           <Stack.Screen

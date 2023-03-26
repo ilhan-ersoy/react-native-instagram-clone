@@ -8,6 +8,7 @@ import SearchScreen from './screens/search/SearchScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import ExploreScreen from './screens/explore/explore';
 import HomeScreen from './screens/home';
+import LoginScreen from './screens/Login/LoginScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -92,6 +93,7 @@ function AppScreens() {
                     }
                 }}
             />
+            
         </Tab.Navigator >
     )
 }

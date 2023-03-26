@@ -6,6 +6,7 @@ import { ScrollView } from "react-native";
 import { useRef } from 'react';
 import BottomSheet from "react-native-gesture-bottom-sheet";
 import ProfileSettings from '../home/components/BottomSheets/ProfileSettings';
+import { faker } from '@faker-js/faker';
 
 
 
@@ -82,7 +83,7 @@ function ProfileScreen({ navigation }) {
                     <View style={{ alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center' }}>
                         <View style={{ marginTop: 10, flexDirection: 'column', alignItems: 'center' }}>
                             <View style={styles.story}>
-                                <Image style={{ width: 68, height: 68, borderWidth: 1, borderColor: '#BABABA', borderRadius: 100 }} source={{ uri: 'https://scontent.cdninstagram.com/v/t51.2885-19/240936026_508945976807276_3878467107109739721_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=108&_nc_ohc=kN7LTZT3V6IAX81olyX&edm=APs17CUBAAAA&ccb=7-5&oh=00_AT_EBNaptFaroaqOkhC3aaBs-wMb2Z-h-doO8eFs9y1-_Q&oe=62F3A327&_nc_sid=978cb9' }} />
+                                <Image style={{ width: 68, height: 68, borderWidth: 1, borderColor: '#BABABA', borderRadius: 100 }} source={{ uri: faker.image.city() }} />
                             </View>
                             <Text style={{ fontSize: 13 }}>
                                 Software
@@ -90,7 +91,7 @@ function ProfileScreen({ navigation }) {
                         </View>
                         <View style={{ marginTop: 10, flexDirection: 'column', alignItems: 'center', marginLeft: 10 }}>
                             <View style={styles.story}>
-                                <Image style={{ width: 68, height: 68, borderWidth: 1, borderColor: '#BABABA', borderRadius: 100 }} source={{ uri: 'https://instagram.fsaw3-1.fna.fbcdn.net/v/t51.2885-19/241885286_702809404446745_2398055998208104448_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsaw3-1.fna.fbcdn.net&_nc_cat=1&_nc_ohc=PIz9rpDzr1kAX_igiNW&edm=AHG7ALcBAAAA&ccb=7-5&oh=00_AT9gFjqYg9XfMzs9xBgTegTyDWGcwjGTQP5rqB23OYsa5A&oe=62EA6191&_nc_sid=5cbaad' }} />
+                                <Image style={{ width: 68, height: 68, borderWidth: 1, borderColor: '#BABABA', borderRadius: 100 }} source={{ uri: faker.image.abstract() }} />
                             </View>
                             <Text style={{ fontSize: 13 }}>
                                 Movie

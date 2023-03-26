@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { StyleSheet, Image, Text, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { DropDown, Hearth, Logo, Message, Plus, Messenger, Settings, Save, Recents } from '../../../../Icons';
-import BottomSheet from "react-native-gesture-bottom-sheet";
+
 
 const ProfileSettings = ({ navigation }) => {
 
@@ -14,7 +14,7 @@ const ProfileSettings = ({ navigation }) => {
             <View style={styles.main}>
 
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate('Login')
+                    navigation.navigate("LoginScreen")
                 }} activeOpacity={0.5}>
                     <View style={[styles.text, { flexDirection: 'row', alignItems: 'center' }]}>
                         <View style={{ marginRight: 10 }}>

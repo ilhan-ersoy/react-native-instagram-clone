@@ -35,7 +35,7 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
 
 
     const [showHeart, setShowHeart] = useState(false);
-
+    const [status, setStatus] = React.useState({});
     const handleLike = () => {
         setShowHeart(true);
         setTimeout(() => {
@@ -84,20 +84,21 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                         />
                     </View>
                 ))}
-                <View>
-                    <Video
-                        ref={video}
-                        source={require("../../../assets/video/reels2.mp4")}
-                        rate={1.0}
-                        volume={1.0}
-                        isMuted={true}
-                        resizeMode={"cover"}
-                        shouldPlay={currentIndex === 2 ? true : false}
-                        isLooping
-                        style={{ height: '100%' }}
-                    ></Video>
-                </View>
-
+                {post.user.name == "kingjames"
+                    &&
+                    <View>
+                        <Video
+                            ref={video}
+                            source={require("../../../assets/video/lebron.mp4")}
+                            rate={1.0}
+                            volume={1.0}
+                            isMuted={false}
+                            resizeMode={"cover"}
+                            shouldPlay={currentIndex == 1 ? true : false}
+                            style={{ height: '100%' }}
+                        ></Video>
+                    </View>
+                }
             </Swiper >
 
             <View style={styles.postInfo}>
@@ -146,6 +147,7 @@ const Post = ({ post, setShowComments, navigation, bottomSheet }) => {
                     </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row', marginRight: 50 }}>
+  
                     <TouchableOpacity opacity={1} style={{ width: 8, height: 8, backgroundColor: `${currentIndex == 0 ? '#32B5FF' : '#C4C4C4'}`, borderRadius: 21 }}></TouchableOpacity>
                     <TouchableOpacity opacity={1} style={{ width: 8, height: 8, backgroundColor: `${currentIndex == 1 ? '#32B5FF' : '#C4C4C4'}`, borderRadius: 21, marginLeft: 6 }}></TouchableOpacity>
                 </View>

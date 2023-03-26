@@ -12,7 +12,7 @@ import { setReelsOpacity, setShow } from '../../redux/appSlice';
 import SendStory from '../home/components/InstaStory/SendStory'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-import { Keyframe } from 'react-native-reanimated';
+//import { Keyframe } from 'react-native-reanimated';
 import { faker } from '@faker-js/faker';
 
 const ReelsVideoBanner = ({ mute, setShowComments, showComments }) => {

@@ -259,8 +259,8 @@ const MessageScreen = ({ route, navigation }) => {
                     </View>
 
                     <View style={{ alignSelf: 'flex-end' }}>
-                        {messages.map((message) => (
-                            <View style={{ backgroundColor: '#3c4ad4', padding: 13, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
+                        {messages.map((message, index) => (
+                            <View key={index} style={{ backgroundColor: '#3c4ad4', padding: 13, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
                                 <Text style={{ fontWeight: '500', color: '#fff' }}>{message}</Text>
                             </View>
                         ))}
